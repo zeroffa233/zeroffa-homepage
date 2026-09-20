@@ -103,50 +103,52 @@ function Experience() {
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
                 Experience
             </h2>
-            <li className="flex gap-6 mb-2">
-                <span className="w-28 shrink-0 dark:text-neutral-400">
-                    2025 – Present
-                </span>
-                <div>
-                    <p className="font-medium">
-                        University of California San Diego
-                    </p>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400">
+            <ul className="grid grid-cols-[1fr_max-content_max-content] gap-x-10 gap-y-4 items-baseline">
+                <li className="contents">
+                    <div>
+                        <p className="font-medium">
+                            University of California San Diego
+                        </p>
+                        <p className="text-base text-neutral-600 dark:text-neutral-400">
+                            Visiting Student Researcher, Picasso Lab
+                        </p>
+                    </div>
+                    <span className="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
                         Advisor: Prof. Yufei Ding
                     </span>
-                    <p className="text-base text-neutral-600 dark:text-neutral-400">
-                        Visiting Student Researcher in Picasso Lab
-                    </p>
-                </div>
-            </li>
-            <li className="flex gap-6 mb-2">
-                <span className="w-28 shrink-0 dark:text-neutral-400">
-                    2025 – Present
-                </span>
-                <div>
-                    <p className="font-medium">Peking University</p>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400">
+                    <span className="justify-self-end text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+                        2025 – Present
+                    </span>
+                </li>
+                <li className="contents">
+                    <div>
+                        <p className="font-medium">Peking University</p>
+                        <p className="text-base text-neutral-600 dark:text-neutral-400">
+                            Visiting Student Researcher, IF Lab
+                        </p>
+                    </div>
+                    <span className="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
                         Advisor: Prof. Xiang Chen
                     </span>
-                    <p className="text-base text-neutral-600 dark:text-neutral-400">
-                        Visiting Student Researcher in IF Lab
-                    </p>
-                </div>
-            </li>
-            <li className="flex gap-6 mb-2">
-                <span className="w-28 shrink-0 dark:text-neutral-400">
-                    2023 – Present
-                </span>
-                <div>
-                    <p className="font-medium">Southeast University</p>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400">
+                    <span className="justify-self-end text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+                        2025 – Present
+                    </span>
+                </li>
+                <li className="contents">
+                    <div>
+                        <p className="font-medium">Southeast University</p>
+                        <p className="text-base text-neutral-600 dark:text-neutral-400">
+                            B.Eng. in Computer Science and Technology
+                        </p>
+                    </div>
+                    <span className="text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
                         Advisor: Prof. Feng Shan
                     </span>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                        B.Eng. in Computer Science and Technology
-                    </p>
-                </div>
-            </li>
+                    <span className="justify-self-end text-sm text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+                        2023 – Present
+                    </span>
+                </li>
+            </ul>
         </section>
     );
 }
