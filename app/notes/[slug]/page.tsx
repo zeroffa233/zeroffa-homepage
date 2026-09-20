@@ -29,14 +29,16 @@ export default async function Note({ params }) {
 
     return (
         <section>
-            <h1 className="text-4xl font-bold tracking-tight mt-5">
-                {note.metadata.title}
-            </h1>
-            {note.metadata.date && (
-                <div className="flex justify-between items-center mt-5 mb-3 text-base text-neutral-600 dark:text-neutral-400">
-                    <p>{formatDate(note.metadata.date)}</p>
-                </div>
-            )}
+            <div className="flex justify-between items-center mt-5 mb-3">
+                <h1 className="text-4xl font-bold tracking-tight">
+                    {note.metadata.title}
+                </h1>
+                {note.metadata.date && (
+                    <p className="text-4xl text-neutral-600 dark:text-neutral-400">
+                        {formatDate(note.metadata.date)}
+                    </p>
+                )}
+            </div>
             <article className="prose">
                 <CustomMDX source={note.content} />
             </article>
