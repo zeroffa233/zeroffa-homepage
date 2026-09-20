@@ -4,7 +4,7 @@ import * as Public from "../public";
 
 export default function Page() {
     return (
-        <section>
+        <section className="text-lg">
             <ProfileCard />
             <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
             <Biography />

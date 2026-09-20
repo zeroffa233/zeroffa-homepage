@@ -35,8 +35,8 @@ export default function Notes() {
                     Notes
                 </h2>
                 <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                    Notes organized by topic rather than time — papers, books,
-                    projects and beyond.
+                    Curated notes organized by topic rather than time —
+                    papers, books, projects and beyond.
                 </p>
             </div>
             {sections.map(({ name, title, flat, groups }) => (
