@@ -33,7 +33,11 @@ function mirrorTree(src, dest) {
         if (entry.isDirectory()) {
             fs.mkdirSync(destPath, { recursive: true })
             mirrorTree(srcPath, destPath)
-        } else if (!entry.name.endsWith('.mdx') && !entry.name.startsWith('.')) {
+        } else if (
+            !entry.name.endsWith('.mdx') &&
+            !entry.name.startsWith('.') &&
+            entry.name !== 'order.json'
+        ) {
             fs.copyFileSync(srcPath, destPath)
         }
     }
