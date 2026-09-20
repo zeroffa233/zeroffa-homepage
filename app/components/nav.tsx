@@ -22,6 +22,9 @@ const navLeftItems = {
 };
 
 const navRightItems = {
+    "/rss": {
+        name: "RSS",
+    },
     "https://scholar.google.com/citations?user=2WZSOp8AAAAJ&hl=en": {
         name: "Scholar",
     },
