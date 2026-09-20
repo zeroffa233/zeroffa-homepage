@@ -111,10 +111,10 @@ function Experience() {
                     <span className="justify-self-end text-lg font-medium text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
                         2025 – Present
                     </span>
-                    <p className="text-base text-neutral-600 dark:text-neutral-400">
+                    <p className="pb-2 text-base text-neutral-600 dark:text-neutral-400">
                         Visiting Student Researcher, Picasso Lab
                     </p>
-                    <p className="justify-self-end text-base text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
+                    <p className="justify-self-end pb-2 text-base text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
                         Advisor: Prof. Yufei Ding
                     </p>
                 </li>
@@ -123,10 +123,10 @@ function Experience() {
                     <span className="justify-self-end text-lg font-medium text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
                         2025 – Present
                     </span>
-                    <p className="text-base text-neutral-600 dark:text-neutral-400">
+                    <p className="pb-2 text-base text-neutral-600 dark:text-neutral-400">
                         Visiting Student Researcher, IF Lab
                     </p>
-                    <p className="justify-self-end text-base text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
+                    <p className="justify-self-end pb-2 text-base text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
                         Advisor: Prof. Xiang Chen
                     </p>
                 </li>
@@ -135,10 +135,10 @@ function Experience() {
                     <span className="justify-self-end text-lg font-medium text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
                         2023 – Present
                     </span>
-                    <p className="text-base text-neutral-600 dark:text-neutral-400">
+                    <p className="pb-2 text-base text-neutral-600 dark:text-neutral-400">
                         B.Eng. in Computer Science and Technology
                     </p>
-                    <p className="justify-self-end text-base text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
+                    <p className="justify-self-end pb-2 text-base text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
                         Advisor: Prof. Feng Shan
                     </p>
                 </li>
