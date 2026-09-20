@@ -67,8 +67,9 @@ function ProfileCard() {
                         <Image src={Public.seuLogo} alt="SEU Logo" />
                     </Link>
                 </div>
-                <p className="italic text-lg text-neutral-500 dark:text-neutral-400">
+                <p className="italic text-lg text-neutral-500 dark:text-neutral-400 text-right">
                     “江南雨，落如花满地，飘零。”
+                    <br />——《辞梦烟雨》
                 </p>
             </div>
         </section>
