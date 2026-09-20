@@ -114,7 +114,7 @@ function Experience() {
                     <span className="text-sm text-neutral-500 dark:text-neutral-400">
                         Advisor: Prof. Yufei Ding
                     </span>
-                    <p className="text-neutral-600 dark:text-neutral-400">
+                    <p className="text-base text-neutral-600 dark:text-neutral-400">
                         Visiting Student Researcher in Picasso Lab
                     </p>
                 </div>
@@ -128,7 +128,7 @@ function Experience() {
                     <span className="text-sm text-neutral-500 dark:text-neutral-400">
                         Advisor: Prof. Xiang Chen
                     </span>
-                    <p className="text-neutral-600 dark:text-neutral-400">
+                    <p className="text-base text-neutral-600 dark:text-neutral-400">
                         Visiting Student Researcher in IF Lab
                     </p>
                 </div>
@@ -142,7 +142,7 @@ function Experience() {
                     <span className="text-sm text-neutral-500 dark:text-neutral-400">
                         Advisor: Prof. Feng Shan
                     </span>
-                    <p className="text-neutral-600 dark:text-neutral-400">
+                    <p className="text-base text-neutral-600 dark:text-neutral-400">
                         B.Eng. in Computer Science and Technology
                     </p>
                 </div>
