@@ -69,7 +69,7 @@ export default function RootLayout({
                 lora.variable,
             )}
         >
-            <body className={cx(lora.className, "antialiased")}>
+            <body className={cx("antialiased")}>
                 <main className="flex-auto w-[1100] mx-auto px-10 flex flex-col">
                     <Navbar />
                     {children}
