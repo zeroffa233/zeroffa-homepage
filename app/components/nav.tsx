@@ -43,7 +43,6 @@ function MusicToggle() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const attemptsRef = useRef(0);
     const [playing, setPlaying] = useState(false);
-    const [tip, setTip] = useState<{ x: number; y: number } | null>(null);
 
     async function pickAndPlay() {
         try {
@@ -89,22 +88,13 @@ function MusicToggle() {
     return (
         <button
             onClick={toggle}
-            onMouseEnter={(e) => setTip({ x: e.clientX, y: e.clientY })}
-            onMouseMove={(e) => setTip({ x: e.clientX, y: e.clientY })}
-            onMouseLeave={() => setTip(null)}
             aria-label={playing ? "暂停音乐" : "播放音乐"}
-            title={playing ? "暂停音乐" : "播放音乐"}
-            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400 flex align-middle relative py-1 px-2 m-1 cursor-pointer"
+            className="group transition-all hover:text-[#0047AB] dark:hover:text-blue-400 flex align-middle relative py-1 px-2 m-1 cursor-pointer focus:outline-none"
         >
             {playing ? <MusicOnIcon /> : <MusicOffIcon />}
-            {tip && (
-                <span
-                    className="fixed z-50 px-3 py-1.5 text-sm rounded-md bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 shadow-md pointer-events-none whitespace-nowrap"
-                    style={{ left: tip.x + 14, top: tip.y - 40 }}
-                >
-                    Would you like to listen to my favorite songs with me?
-                </span>
-            )}
+            <span className="pointer-events-none absolute bottom-full right-0 mb-2 w-max text-sm text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                Would you like to listen to my favorite songs?
+            </span>
         </button>
     );
 }
