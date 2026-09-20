@@ -42,3 +42,6 @@ Thumbs.db
 
 # Generated from posts/blog/<slug>/ by scripts/copy-post-assets.mjs
 public/blog-assets/
+
+# Generated from posts/notes/** by scripts/copy-post-assets.mjs
+public/notes-assets/
