@@ -25,17 +25,20 @@ function MusicOffIcon() {
 
 function MusicOnIcon() {
     return (
-        <span className="flex items-end gap-[2px] h-[18px]">
-            <span className="music-bar w-[3px] h-full bg-current rounded-sm" />
-            <span
-                className="music-bar w-[3px] h-full bg-current rounded-sm"
-                style={{ animationDelay: "0.25s" }}
-            />
-            <span
-                className="music-bar w-[3px] h-full bg-current rounded-sm"
-                style={{ animationDelay: "0.5s" }}
-            />
-        </span>
+        <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+        </svg>
     );
 }
 
@@ -43,6 +46,7 @@ function MusicToggle() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const attemptsRef = useRef(0);
     const [playing, setPlaying] = useState(false);
+    const [tip, setTip] = useState<{ x: number; y: number } | null>(null);
 
     async function pickAndPlay() {
         try {
@@ -88,13 +92,22 @@ function MusicToggle() {
     return (
         <button
             onClick={toggle}
+            onMouseEnter={(e) => setTip({ x: e.clientX, y: e.clientY })}
+            onMouseMove={(e) => setTip({ x: e.clientX, y: e.clientY })}
+            onMouseLeave={() => setTip(null)}
             aria-label={playing ? "暂停音乐" : "播放音乐"}
-            className="group transition-all hover:text-[#0047AB] dark:hover:text-blue-400 flex align-middle relative py-1 px-2 m-1 cursor-pointer focus:outline-none"
+            className="outline-none focus:outline-none focus-visible:outline-none transition-all hover:text-[#0047AB] dark:hover:text-blue-400 flex align-middle relative py-1 px-2 m-1 cursor-pointer"
+            style={{ WebkitTapHighlightColor: "transparent" }}
         >
             {playing ? <MusicOnIcon /> : <MusicOffIcon />}
-            <span className="pointer-events-none absolute bottom-full right-0 mb-2 w-max text-sm text-neutral-500 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                Would you like to listen to my favorite songs?
-            </span>
+            {tip && (
+                <span
+                    className="pointer-events-none fixed z-50 text-sm text-neutral-500 whitespace-nowrap"
+                    style={{ left: tip.x + 14, top: tip.y + 18 }}
+                >
+                    Would you like to listen to my favorite songs?
+                </span>
+            )}
         </button>
     );
 }

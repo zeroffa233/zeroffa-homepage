@@ -176,22 +176,6 @@ table {
   white-space: nowrap;
 }
 
-/* Music toggle equalizer bars */
-@keyframes music-eq {
-  0%,
-  100% {
-    transform: scaleY(0.3);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
-.music-bar {
-  animation: music-eq 1s ease-in-out infinite;
-  transform-origin: bottom;
-}
-
 .title {
   text-wrap: balance;
 }
