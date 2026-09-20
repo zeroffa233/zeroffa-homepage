@@ -26,7 +26,7 @@ export default function Links() {
                             href="https://sdiaa.tech/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             DEFENSE Group
                         </Link>
@@ -38,7 +38,7 @@ export default function Links() {
                             href="https://yufeiding.ucsd.edu/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             Picasso Lab
                         </Link>
@@ -50,7 +50,7 @@ export default function Links() {
                             href="https://iplusplus.club/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             I++ Club
                         </Link>
@@ -68,7 +68,7 @@ export default function Links() {
                             href="https://www.harkerhand.cn/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             Harkerhand's Blog
                         </Link>
@@ -80,7 +80,7 @@ export default function Links() {
                             href="https://xelinquency.github.io/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             Illunight's Blog
                         </Link>
@@ -92,7 +92,7 @@ export default function Links() {
                             href="https://winnie0jia7.github.io/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             Winnie's Blog
                         </Link>

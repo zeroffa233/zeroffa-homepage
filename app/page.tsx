@@ -159,7 +159,7 @@ function Publication() {
                             href="https://doi.org/10.1109/ICPADS67057.2025.11323001"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             Skyline-Based Cooperative Scheduling: Makespan
                             Minimization for Dock-to-Dock UAV Fleets
@@ -181,7 +181,7 @@ function Publication() {
                             href="#"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:underline underline-offset-4"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                         >
                             From Docking Station to Docking Station: Completing
                             Tasks in Minimum Time by Cooperative UAV Fleets
