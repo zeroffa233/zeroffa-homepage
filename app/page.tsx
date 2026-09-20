@@ -4,7 +4,7 @@ import * as Public from "../public";
 
 export default function Page() {
     return (
-        <section className="text-lg">
+        <section>
             <ProfileCard />
             <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
             <Biography />
@@ -79,7 +79,7 @@ function ProfileCard() {
 
 function Biography() {
     return (
-        <section>
+        <section className="text-lg">
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
                 Biography
             </h2>
@@ -99,7 +99,7 @@ function Biography() {
 
 function Experience() {
     return (
-        <section>
+        <section className="text-lg">
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
                 Experience
             </h2>
@@ -153,9 +153,9 @@ function Experience() {
 
 function Publications() {
     return (
-        <section>
+        <section className="text-lg">
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
-                Publications
+                Publication
             </h2>
             <ul className="list-disc list-outside pl-4">
                 <li className="mb-2">
@@ -210,9 +210,9 @@ function Publications() {
 
 function Honors() {
     return (
-        <section>
+        <section className="text-lg">
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
-                Honors & Awards
+                Honors &amp; Awards
             </h2>
 
             <ul className="list-disc list-outside pl-4">
