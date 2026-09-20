@@ -168,7 +168,7 @@ function Publication() {
 
                     <p className="text-neutral-600 dark:text-neutral-400">
                         <strong>Baixin Wan</strong>, Haozhe Zhang, Jiaqi Li,
-                        Jianping Huang, Feng Shan, and Yun Wang.
+                        Jianping Huang, Feng Shan<sup>*</sup>, and Yun Wang.
                     </p>
 
                     <p className="text-sm text-neutral-500 dark:text-neutral-400">
@@ -189,7 +189,8 @@ function Publication() {
                     </p>
 
                     <p className="text-neutral-600 dark:text-neutral-400">
-                        <strong>Baixin Wan</strong>, Feng Shan, Jianping Huang.
+                        <strong>Baixin Wan</strong>, Feng Shan<sup>*</sup>,
+                        Jianping Huang.
                     </p>
 
                     <p className="text-sm text-neutral-500 dark:text-neutral-400">
