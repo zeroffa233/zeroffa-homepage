@@ -97,6 +97,24 @@ html {
   @apply m-0;
 }
 
+.prose {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  font-family:
+    var(--font-lora),
+    "Noto Serif SC",
+    serif;
+}
+
 .prose p {
   @apply my-4 text-neutral-800 dark:text-neutral-200;
 }
