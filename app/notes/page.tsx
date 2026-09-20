@@ -16,7 +16,7 @@ export default function Notes() {
             </h3>
             <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>
             <h3 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 mb-3">
-                Code
+                Projects
             </h3>
             <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>
             <h3 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 mb-3">
