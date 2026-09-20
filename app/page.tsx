@@ -151,7 +151,7 @@ function Publications() {
     return (
         <section className="text-lg">
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
-                Publication
+                Publications
             </h2>
             <ul className="list-disc list-outside pl-4">
                 <li className="mb-2">
@@ -167,7 +167,7 @@ function Publications() {
                         </Link>
                     </p>
 
-                    <p className="text-neutral-600 dark:text-neutral-400">
+                    <p className="text-base text-neutral-600 dark:text-neutral-400">
                         <strong>Baixin Wan</strong>, Haozhe Zhang, Jiaqi Li,
                         Jianping Huang, Feng Shan<sup>*</sup>, and Yun Wang.
                     </p>
@@ -189,7 +189,7 @@ function Publications() {
                         </Link>
                     </p>
 
-                    <p className="text-neutral-600 dark:text-neutral-400">
+                    <p className="text-base text-neutral-600 dark:text-neutral-400">
                         <strong>Baixin Wan</strong>, Feng Shan<sup>*</sup>,
                         Jianping Huang.
                     </p>
