@@ -30,9 +30,14 @@ export default function Notes() {
     const sections = getNotesStructure();
     return (
         <div>
-            <h2 className="text-[#0047AB] text-4xl font-bold tracking-tight dark:text-neutral-100 mt-5">
-                Notes
-            </h2>
+            <div className="flex justify-between items-baseline mt-5">
+                <h2 className="text-[#0047AB] text-4xl font-bold tracking-tight dark:text-neutral-100">
+                    Notes
+                </h2>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    Curated notes on papers, books and projects.
+                </p>
+            </div>
             {sections.map(({ name, title, flat, groups }) => (
                 <div key={name}>
                     <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>

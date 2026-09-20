@@ -8,9 +8,14 @@ export const metadata = {
 export default function Page() {
     return (
         <section>
-            <h2 className="text-[#0047AB] text-4xl font-bold tracking-tight dark:text-neutral-100 mt-5">
-                Blog
-            </h2>
+            <div className="flex justify-between items-baseline mt-5">
+                <h2 className="text-[#0047AB] text-4xl font-bold tracking-tight dark:text-neutral-100">
+                    Blog
+                </h2>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    Casual writing and updates, newest first.
+                </p>
+            </div>
             <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>
             <BlogPosts />
         </section>
