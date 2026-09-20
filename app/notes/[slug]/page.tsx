@@ -39,7 +39,7 @@ export default async function Note({ params }) {
                     </p>
                 </div>
             )}
-            <article className="prose">
+            <article className="prose text-lg">
                 <CustomMDX source={note.content} />
             </article>
         </section>

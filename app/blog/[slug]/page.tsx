@@ -95,7 +95,7 @@ export default async function Blog({ params }) {
                     {formatDate(post.metadata.publishedAt)}
                 </p>
             </div>
-            <article className="prose">
+            <article className="prose text-lg">
                 <CustomMDX source={post.content} />
             </article>
         </section>
