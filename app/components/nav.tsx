@@ -42,6 +42,24 @@ function MusicOnIcon() {
     );
 }
 
+const TRACKS = [
+    {
+        name: "《辞梦烟雨》",
+        artist: "解语花",
+        url: "https://m801.music.126.net/20260921051941/c30cbb26659e52067490d86d647ed495/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34024387764/bf5a/38ed/dc83/aabad5bf2e3383f835fda6109ef77224.mp3?vuutv=WWSxAe1qylmPTU9V5Rm6qy21r1HxsIqdHbYuXAbl1Zl6t2UenYXHxn1gAXUOM6z7hKLdqokN8TDasPhKAdcTKR8YnZhBqYh5jx7wH9fawTU=",
+    },
+    {
+        name: "《Beautiful World (Da Capo Version)》",
+        artist: "宇多田ヒカル",
+        url: "https://m801.music.126.net/20260921052125/d271eaaa96a80bdb4f12a6bd5ecbc5d3/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/32071429014/e9fc/be2e/58d0/f5611622e85f6b62e876106a14f776c5.mp3?vuutv=n+ZZC33rYYpLSUx1QXZ3hfQz8NR+TWihr9n4t6ppUSLtcJSbUeTnMGNDNVo8mInaZaIh9k97zcU/JdLkE//QF4qWUC2OAHxUT+yH2BQFiMw=",
+    },
+    {
+        name: "《한(寒)》",
+        artist: "i-dle",
+        url: "https://m7.music.126.net/20260921052311/0aeec2575fbaa4d2847c4cd088eae9c7/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/14051984507/b523/187f/6b9b/6656dc7bde9989442b2d87145db2976e.mp3?vuutv=B7ZFbhYTSUHj6ZAnNVAtFzFIPkQ7xW/EowZ9qox5cVuYZ6dl/DALeQE30UwSsbJ5U6PLLOaBYFEtdsxf7R4v+yAucBwxr5yaTuBIk7ZNMmA=",
+    },
+];
+
 function MusicToggle() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const attemptsRef = useRef(0);
@@ -50,13 +68,7 @@ function MusicToggle() {
 
     async function pickAndPlay() {
         try {
-            const res = await fetch("/music.jsonl");
-            const lines = (await res.text()).trim().split("\n");
-            const tracks = lines
-                .map((line) => JSON.parse(line))
-                .filter((t) => t.url);
-            if (tracks.length === 0) return;
-            const track = tracks[Math.floor(Math.random() * tracks.length)];
+            const track = TRACKS[Math.floor(Math.random() * TRACKS.length)];
             if (!audioRef.current) {
                 audioRef.current = new Audio();
                 audioRef.current.volume = 0.7;
@@ -66,7 +78,7 @@ function MusicToggle() {
             audio.onended = () => void pickAndPlay();
             audio.onerror = () => {
                 attemptsRef.current += 1;
-                if (attemptsRef.current < tracks.length) {
+                if (attemptsRef.current < TRACKS.length) {
                     void pickAndPlay();
                 } else {
                     setPlaying(false);
@@ -76,7 +88,7 @@ function MusicToggle() {
             attemptsRef.current = 0;
             setPlaying(true);
         } catch {
-            // fetch/parse/play failure: give up quietly, stay disabled
+            // play failure: give up quietly, stay disabled
             setPlaying(false);
         }
     }
