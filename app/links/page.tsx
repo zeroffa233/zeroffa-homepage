@@ -17,7 +17,7 @@ export default function Links() {
                     Links
                 </h2>
                 <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                    Sites and people worth reading. To exchange friend links,
+                    Sites and people worth visiting. To exchange friend links,
                     email baixinwan@seu.edu.cn.
                 </p>
             </div>
