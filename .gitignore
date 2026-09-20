@@ -39,3 +39,6 @@ Thumbs.db
 
 # VPS deploy infra (nginx config contains private subdomains/ports)
 .deploy/
+
+# Generated from posts/blog/<slug>/ by scripts/copy-post-assets.mjs
+public/blog-assets/
