@@ -79,9 +79,7 @@ function Biography() {
             <p className="mb-2">
                 I am an undergraduate student majoring in Computer Science and
                 Technology at Southeast University, with an expected graduation
-                date of August 2027. I am currently conducting research with the
-                DEFENSE Group at PALM Lab, under the supervision of Prof. Shimin
-                Di, where I will pursue my graduate studies.
+                date of August 2027.
             </p>
             <p className="mb-2">
                 My research interests lie in ML systems, LLM, and Coding Agent.
