@@ -18,7 +18,6 @@ export type NoteListItem = {
     section: string
     group?: string
     title: string
-    summary?: string
     date?: string
 }
 
@@ -96,7 +95,6 @@ function collectInto(
                 section,
                 group,
                 title: meta.title ?? slug,
-                summary: meta.summary,
                 date: meta.date,
             }
             if (group) {

@@ -17,7 +17,6 @@ export async function generateMetadata({ params }) {
     }
     return {
         title: note.metadata.title,
-        description: note.metadata.summary,
     };
 }
 

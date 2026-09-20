@@ -19,11 +19,6 @@ function EntryList({ notes }: { notes: NoteListItem[] }) {
                             {formatDate(note.date)}
                         </span>
                     )}
-                    {note.summary && (
-                        <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                            {note.summary}
-                        </div>
-                    )}
                 </li>
             ))}
         </ol>
