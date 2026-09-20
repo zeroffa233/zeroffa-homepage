@@ -59,6 +59,7 @@ function MusicToggle() {
             const track = tracks[Math.floor(Math.random() * tracks.length)];
             if (!audioRef.current) {
                 audioRef.current = new Audio();
+                audioRef.current.volume = 0.7;
             }
             const audio = audioRef.current;
             audio.src = track.url;
@@ -96,7 +97,7 @@ function MusicToggle() {
             onMouseMove={(e) => setTip({ x: e.clientX, y: e.clientY })}
             onMouseLeave={() => setTip(null)}
             aria-label={playing ? "暂停音乐" : "播放音乐"}
-            className="outline-none focus:outline-none focus-visible:outline-none transition-all hover:text-[#0047AB] dark:hover:text-blue-400 flex align-middle relative py-1 px-2 m-1 cursor-pointer"
+            className={`outline-none focus:outline-none focus-visible:outline-none transition-all hover:text-[#0047AB] dark:hover:text-blue-400 flex align-middle relative py-1 px-2 m-1 cursor-pointer ${playing ? "text-[#0047AB] dark:text-blue-400" : ""}`}
             style={{ WebkitTapHighlightColor: "transparent" }}
         >
             {playing ? <MusicOnIcon /> : <MusicOffIcon />}
