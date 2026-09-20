@@ -6,7 +6,10 @@ function EntryList({ notes }: { notes: NoteListItem[] }) {
     return (
         <ol className="list-decimal list-outside pl-5">
             {notes.map((note) => (
-                <li key={note.slug} className="mb-2">
+                <li
+                    key={note.slug}
+                    className="mb-2 flex justify-between items-baseline"
+                >
                     <Link
                         href={`/notes/${note.slug}`}
                         className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
@@ -14,8 +17,7 @@ function EntryList({ notes }: { notes: NoteListItem[] }) {
                         {note.title}
                     </Link>
                     {note.date && (
-                        <span className="text-sm text-neutral-500 dark:text-neutral-400">
-                            {" "}
+                        <span className="text-neutral-500 dark:text-neutral-400">
                             {formatDate(note.date)}
                         </span>
                     )}
