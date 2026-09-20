@@ -103,7 +103,7 @@ function Experience() {
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
                 Experience
             </h2>
-            <ul className="grid grid-cols-[1fr_max-content] gap-x-10 gap-y-1 items-baseline">
+            <ul className="grid grid-cols-[1fr_max-content] gap-x-10 gap-y-0 items-baseline">
                 <li className="contents">
                     <p className="font-medium">
                         University of California San Diego
