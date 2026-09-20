@@ -45,7 +45,7 @@ export function Navbar() {
                                         key={path}
                                         href={path}
                                         className={`
-  transition-all hover:text-neutral-800 dark:hover:text-neutral-200
+  transition-all hover:text-[#0047AB] dark:hover:text-blue-400
   flex align-middle relative py-1 px-2 m-1
   ${pathname === path ? "font-bold" : ""}
 `}
@@ -65,7 +65,7 @@ export function Navbar() {
                                         href={path}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={` transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1`}
+                                        className={` transition-all hover:text-[#0047AB] dark:hover:text-blue-400 flex align-middle relative py-1 px-2 m-1`}
                                     >
                                         {name}
                                     </Link>
