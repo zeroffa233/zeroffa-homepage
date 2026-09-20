@@ -167,12 +167,12 @@ function Publications() {
                         </Link>
                     </p>
 
-                    <p className="text-lg text-neutral-600 dark:text-neutral-400">
+                    <p className="text-base text-neutral-600 dark:text-neutral-400">
                         <strong>Baixin Wan</strong>, Haozhe Zhang, Jiaqi Li,
                         Jianping Huang, Feng Shan<sup>*</sup>, and Yun Wang.
                     </p>
 
-                    <p className="text-lg text-neutral-500 dark:text-neutral-400">
+                    <p className="text-base text-neutral-500 dark:text-neutral-400">
                         IEEE Transactions on Services Computing (TSC) · CCF-A
                     </p>
                 </li>
@@ -189,12 +189,12 @@ function Publications() {
                         </Link>
                     </p>
 
-                    <p className="text-lg text-neutral-600 dark:text-neutral-400">
+                    <p className="text-base text-neutral-600 dark:text-neutral-400">
                         <strong>Baixin Wan</strong>, Feng Shan<sup>*</sup>,
                         Jianping Huang.
                     </p>
 
-                    <p className="text-lg text-neutral-500 dark:text-neutral-400">
+                    <p className="text-base text-neutral-500 dark:text-neutral-400">
                         31st IEEE International Conference on Parallel and
                         Distributed Systems (ICPADS 2025) · CCF-C
                     </p>
