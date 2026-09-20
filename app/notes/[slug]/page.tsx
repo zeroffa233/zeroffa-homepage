@@ -33,8 +33,10 @@ export default async function Note({ params }) {
                 {note.metadata.title}
             </h1>
             {note.metadata.date && (
-                <div className="flex justify-between items-center mt-5 mb-3 text-base text-neutral-600 dark:text-neutral-400">
-                    <p>{formatDate(note.metadata.date)}</p>
+                <div className="flex justify-between items-center mt-5 mb-3 text-lg text-neutral-600 dark:text-neutral-400">
+                    <p className="text-lg text-neutral-600 dark:text-neutral-400">
+                        {formatDate(note.metadata.date)}
+                    </p>
                 </div>
             )}
             <article className="prose">

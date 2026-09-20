@@ -1,26 +1,17 @@
 import Link from "next/link";
-import { formatDate } from "app/blog/utils";
 import { getNotesStructure, NoteListItem } from "app/notes/utils";
 
 function EntryList({ notes }: { notes: NoteListItem[] }) {
     return (
         <ol className="list-decimal list-outside pl-5">
             {notes.map((note) => (
-                <li
-                    key={note.slug}
-                    className="mb-2 flex justify-between items-baseline"
-                >
+                <li key={note.slug} className="mb-2">
                     <Link
                         href={`/notes/${note.slug}`}
-                        className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
+                        className="text-lg transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
                     >
                         {note.title}
                     </Link>
-                    {note.date && (
-                        <span className="text-neutral-500 dark:text-neutral-400">
-                            {formatDate(note.date)}
-                        </span>
-                    )}
                 </li>
             ))}
         </ol>
