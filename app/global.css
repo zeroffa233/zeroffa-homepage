@@ -96,7 +96,7 @@ html {
 }
 
 .prose p {
-  @apply my-4 text-neutral-800 dark:text-neutral-200;
+  @apply mb-4 text-neutral-800 dark:text-neutral-200;
 }
 
 .prose h1 {
@@ -104,7 +104,7 @@ html {
 }
 
 .prose h2 {
-  @apply text-3xl font-medium tracking-tight mt-6 mb-0;
+  @apply text-3xl font-medium tracking-tight mt-6 mb-3;
 }
 
 .prose h3 {
