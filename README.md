@@ -1,4 +1,4 @@
-# Personal Homepage
+# ZeroFFa Homepage
 
 A personal homepage with a blog, written from scratch based on the
 [portfolio-blog-starter](https://github.com/vercel/examples/tree/main/solutions/blog)
@@ -19,19 +19,3 @@ template. It keeps the template's feature set:
 - Self-hosted fonts: Lora (Latin) and Noto Serif SC (Chinese serif, sliced
   variable font)
 - Vercel Analytics / Speed Insights
-
-## Deployment
-
-The build output (`out/`) is served by nginx on a VPS. A systemd timer polls
-GitHub every 5 minutes; on new commits it pulls, rebuilds and rsyncs the
-output to the web root — deployment is fully automatic.
-
-## Development
-
-```bash
-pnpm install
-pnpm dev
-```
-
-Blog posts live in `posts/blog/<slug>.mdx`; notes in
-`posts/notes/<section>/<topic>/<slug>.mdx`.
