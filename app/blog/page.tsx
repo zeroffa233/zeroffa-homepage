@@ -11,7 +11,7 @@ export default function Page() {
             <h2 className="text-[#0047AB] text-4xl font-bold tracking-tight dark:text-neutral-100 mt-5">
                 Blog
             </h2>
-            <hr className="my-5"></hr>
+            <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>
             <BlogPosts />
         </section>
     );

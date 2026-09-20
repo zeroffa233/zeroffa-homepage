@@ -15,7 +15,7 @@ export default function Links() {
             <h2 className="text-[#0047AB] text-4xl font-bold tracking-tight dark:text-neutral-100 mt-5">
                 Links
             </h2>
-            <hr className="my-5"></hr>
+            <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>
             <h3 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 mb-3">
                 Organizations
             </h3>
@@ -57,7 +57,7 @@ export default function Links() {
                     </p>
                 </li>
             </ul>
-            <hr className="my-5"></hr>
+            <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>
             <h3 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 mb-3">
                 Personal
             </h3>

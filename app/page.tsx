@@ -6,13 +6,13 @@ export default function Page() {
     return (
         <section>
             <ProfileCard />
-            <hr className="mt-5"></hr>
+            <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
             <Biography />
-            <hr className="mt-5"></hr>
+            <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
             <Experience />
-            <hr className="mt-5"></hr>
-            <Publication />
-            <hr className="mt-5"></hr>
+            <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
+            <Publications />
+            <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
             <Honors />
         </section>
     );
@@ -69,7 +69,8 @@ function ProfileCard() {
                 </div>
                 <p className="italic text-lg text-neutral-500 dark:text-neutral-400 text-right">
                     “江南雨，落如花满地，飘零。”
-                    <br />——《辞梦烟雨》
+                    <br />
+                    ——《辞梦烟雨》
                 </p>
             </div>
         </section>
@@ -150,11 +151,11 @@ function Experience() {
     );
 }
 
-function Publication() {
+function Publications() {
     return (
         <section>
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
-                Publication
+                Publications
             </h2>
             <ul className="list-disc list-outside pl-4">
                 <li className="mb-2">
