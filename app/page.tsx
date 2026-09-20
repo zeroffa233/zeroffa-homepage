@@ -68,7 +68,7 @@ function ProfileCard() {
                     </Link>
                 </div>
                 <p className="italic text-lg text-neutral-500 dark:text-neutral-400">
-                    "Less is more."
+                    “江南雨，落如花满地，飘零。”
                 </p>
             </div>
         </section>
