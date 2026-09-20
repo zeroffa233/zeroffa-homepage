@@ -47,7 +47,7 @@ export function Navbar() {
                                         className={`
   transition-all hover:text-[#0047AB] dark:hover:text-blue-400
   flex align-middle relative py-1 px-2 m-1
-  ${pathname === path ? "font-bold" : ""}
+  ${pathname === path ? "font-bold text-[#0047AB] dark:text-blue-400" : ""}
 `}
                                     >
                                         {name}
