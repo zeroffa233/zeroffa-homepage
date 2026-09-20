@@ -48,7 +48,7 @@ export default function Notes() {
                     {flat.length > 0 && <EntryList notes={flat} />}
                     {groups.map(({ name: group, notes }) => (
                         <div key={group} className="mt-5">
-                            <p className="text-lg font-medium mb-2">{group}</p>
+                            <p className="text-lg font-semibold mb-2">{group}</p>
                             <EntryList notes={notes} />
                         </div>
                     ))}
