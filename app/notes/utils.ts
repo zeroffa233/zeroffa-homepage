@@ -7,65 +7,157 @@ import { parseFrontmatter } from 'app/blog/utils'
 //   posts/notes/<分类>/<小标题>/<slug>.mdx  ← 二级文件夹 = 索引页加粗小标题
 // 附件与 mdx 同目录放置，构建时镜像到 public/notes-assets/。
 // URL: /notes/<slug>，slug 全局唯一。
+// 渲染顺序：posts/notes/order.json 的 sections / groups 指定优先级（数字越大越靠前，
+// 未指定默认 -1），同级按字母序。块内文章按 date 正序（新的在下面）。
 
 const NOTES_ROOT = path.join(process.cwd(), 'posts', 'notes')
-const SECTION_ORDER = ['papers', 'books', 'projects', 'misc']
+const ORDER_FILE = path.join(NOTES_ROOT, 'order.json')
 
 export type NoteListItem = {
     slug: string
-    section: string // 一级文件夹名（原样）
-    group?: string // 二级文件夹名
+    section: string
+    group?: string
     title: string
     summary?: string
     date?: string
+}
+
+export type NoteGroup = { name: string; notes: NoteListItem[] }
+export type NoteSection = {
+    name: string
+    title: string
+    flat: NoteListItem[]
+    groups: NoteGroup[]
+}
+
+type OrderConfig = {
+    sections?: Record<string, number>
+    groups?: Record<string, number>
+}
+
+function getOrderConfig(): OrderConfig {
+    try {
+        const parsed = JSON.parse(fs.readFileSync(ORDER_FILE, 'utf-8'))
+        return { sections: parsed.sections ?? {}, groups: parsed.groups ?? {} }
+    } catch {
+        return {}
+    }
 }
 
 export function getSectionTitle(dir: string) {
     return dir.charAt(0).toUpperCase() + dir.slice(1)
 }
 
-// 分区 = posts/notes 下的一级文件夹；预设顺序优先，其余按字母序
-export function getSections(): { name: string; title: string }[] {
-    if (!fs.existsSync(NOTES_ROOT)) return []
-    const dirs = fs
-        .readdirSync(NOTES_ROOT, { withFileTypes: true })
-        .filter((e) => e.isDirectory())
-        .map((e) => e.name)
-    const preset = SECTION_ORDER.filter((d) => dirs.includes(d))
-    const rest = dirs.filter((d) => !SECTION_ORDER.includes(d)).sort()
-    return [...preset, ...rest].map((name) => ({ name, title: getSectionTitle(name) }))
+function sortEntries(notes: NoteListItem[]) {
+    return [...notes].sort(
+        (a, b) =>
+            (a.date ?? '').localeCompare(b.date ?? '') ||
+            a.title.localeCompare(b.title),
+    )
 }
 
-function collect(list: NoteListItem[], dir: string, segs: string[]) {
+// 递归收集全部笔记；segs 为相对 NOTES_ROOT 的文件夹层级
+function collectInto(
+    sections: Map<
+        string,
+        {
+            flat: NoteListItem[]
+            groups: Map<string, NoteListItem[]>
+        }
+    >,
+    dir: string,
+    segs: string[],
+    order: OrderConfig,
+    seenSlugs: Map<string, string>,
+) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
         const full = path.join(dir, entry.name)
         if (entry.isDirectory()) {
-            collect(list, full, [...segs, entry.name])
-        } else if (entry.name.endsWith('.mdx')) {
+            collectInto(sections, full, [...segs, entry.name], order, seenSlugs)
+        } else if (entry.name.endsWith('.mdx') && segs.length > 0) {
             const slug = path.basename(entry.name, '.mdx')
-            if (list.some((n) => n.slug === slug)) {
-                console.warn(`[notes] duplicate slug "${slug}" (${entry.name}) skipped`)
+            if (seenSlugs.has(slug)) {
+                console.warn(
+                    `[notes] duplicate slug "${slug}" (${entry.name}, first seen at ${seenSlugs.get(slug)}) skipped`,
+                )
                 continue
             }
+            seenSlugs.set(slug, entry.name)
             const { metadata } = parseFrontmatter(fs.readFileSync(full, 'utf-8'))
             const meta = metadata as Record<string, string | undefined>
-            list.push({
+            const section = segs[0]
+            const group = segs[1]
+            if (!sections.has(section)) {
+                sections.set(section, { flat: [], groups: new Map() })
+            }
+            const sectionData = sections.get(section)!
+            const note: NoteListItem = {
                 slug,
-                section: segs[0],
-                group: segs[1],
+                section,
+                group,
                 title: meta.title ?? slug,
                 summary: meta.summary,
                 date: meta.date,
-            })
+            }
+            if (group) {
+                if (!sectionData.groups.has(group)) {
+                    sectionData.groups.set(group, [])
+                }
+                sectionData.groups.get(group)!.push(note)
+            } else {
+                sectionData.flat.push(note)
+            }
         }
     }
 }
 
-// 索引页数据：递归收集全部笔记元信息
+export function getNotesStructure(): NoteSection[] {
+    const order = getOrderConfig()
+    const raw = new Map<
+        string,
+        { flat: NoteListItem[]; groups: Map<string, NoteListItem[]> }
+    >()
+    const seenSlugs = new Map<string, string>()
+    if (fs.existsSync(NOTES_ROOT)) {
+        collectInto(raw, NOTES_ROOT, [], order, seenSlugs)
+    }
+
+    const result: NoteSection[] = []
+    for (const [name, data] of Array.from(raw.entries())) {
+        const sortedGroups = Array.from(data.groups.entries())
+            .map(([groupName, notes]) => ({
+                name: groupName,
+                priority: order.groups?.[`${name}/${groupName}`] ?? -1,
+                notes: sortEntries(notes),
+            }))
+            .sort(
+                (a, b) =>
+                    b.priority - a.priority || a.name.localeCompare(b.name),
+            )
+        result.push({
+            name,
+            title: getSectionTitle(name),
+            flat: sortEntries(data.flat),
+            groups: sortedGroups.map(({ name: gName, notes: gNotes }) => ({
+                name: gName,
+                notes: gNotes,
+            })),
+        })
+    }
+    result.sort(
+        (a, b) =>
+            (order.sections?.[b.name] ?? -1) -
+                (order.sections?.[a.name] ?? -1) ||
+            a.title.localeCompare(b.title),
+    )
+    return result
+}
+
 export function getNoteList(): NoteListItem[] {
-    const list: NoteListItem[] = []
-    if (fs.existsSync(NOTES_ROOT)) collect(list, NOTES_ROOT, [])
-    return list
+    return getNotesStructure().flatMap((s) => [
+        ...s.flat,
+        ...s.groups.flatMap((g) => g.notes),
+    ])
 }
 
 // 单篇笔记：返回 null 时页面走 notFound
