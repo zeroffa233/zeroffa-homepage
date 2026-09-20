@@ -29,10 +29,10 @@ const lora = localFont({
 export const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
     title: {
-        default: "ZeroFFa",
-        template: "%s | ZeroFFa",
+        default: "Baixin Wan",
+        template: "%s | Baixin Wan",
     },
-    description: "This is my portfolio.",
+    description: "Personal homepage.",
     openGraph: {
         title: "My Portfolio",
         description: "This is my portfolio.",

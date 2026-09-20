@@ -22,6 +22,9 @@ const navLeftItems = {
 };
 
 const navRightItems = {
+    "https://scholar.google.com/citations?user=2WZSOp8AAAAJ&hl=en": {
+        name: "Scholar",
+    },
     "https://github.com/zeroffa233": {
         name: "Github",
     },
