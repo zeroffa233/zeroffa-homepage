@@ -112,7 +112,7 @@ html {
 }
 
 .prose h4 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply text-xl font-medium tracking-tight mt-8 mb-2;
 }
 
 .prose strong {
