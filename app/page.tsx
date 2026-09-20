@@ -83,12 +83,12 @@ function Biography() {
             <h2 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 my-3">
                 Biography
             </h2>
-            <p className="mb-2">
+            <p className="mb-1">
                 I am an undergraduate student majoring in Computer Science and
                 Technology at Southeast University, with an expected graduation
                 date of August 2027.
             </p>
-            <p className="mb-2">
+            <p className="mb-1">
                 My research interests lie in ML systems, LLM, and Coding Agent.
                 I am particularly interested in improving the efficiency,
                 reliability, and practical capabilities of ML/Agent systems.
