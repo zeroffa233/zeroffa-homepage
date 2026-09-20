@@ -47,24 +47,29 @@ function ProfileCard() {
                     Email: baixinwan@seu.edu.cn
                 </p>
             </div>
-            <div className="flex gap-5 ml-auto flex-shrink-0">
-                <Link
-                    href="https://aiia.seu.edu.cn/palm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
-                >
-                    <Image src={Public.palmLogo} alt="Palm Logo" />
-                </Link>
+            <div className="flex flex-col justify-between items-end ml-auto flex-shrink-0">
+                <div className="flex gap-5">
+                    <Link
+                        href="https://aiia.seu.edu.cn/palm"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
+                    >
+                        <Image src={Public.palmLogo} alt="Palm Logo" />
+                    </Link>
 
-                <Link
-                    href="https://www.seu.edu.cn/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
-                >
-                    <Image src={Public.seuLogo} alt="SEU Logo" />
-                </Link>
+                    <Link
+                        href="https://www.seu.edu.cn/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
+                    >
+                        <Image src={Public.seuLogo} alt="SEU Logo" />
+                    </Link>
+                </div>
+                <p className="italic text-lg text-neutral-500 dark:text-neutral-400">
+                    "Less is more."
+                </p>
             </div>
         </section>
     );
