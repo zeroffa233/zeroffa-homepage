@@ -4,7 +4,7 @@ import { getNotesStructure, NoteListItem } from "app/notes/utils";
 
 function EntryList({ notes }: { notes: NoteListItem[] }) {
     return (
-        <ol className="list-decimal list-outside pl-6">
+        <ol className="list-decimal list-outside pl-5">
             {notes.map((note) => (
                 <li key={note.slug} className="mb-2">
                     <Link
