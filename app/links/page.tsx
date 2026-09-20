@@ -27,7 +27,7 @@ export default function Links() {
             </h3>
             <ul className="list-disc list-outside pl-4">
                 <li className="mb-2">
-                    <p className="font-medium text-lg">
+                    <p className="text-lg">
                         <Link
                             href="https://sdiaa.tech/"
                             target="_blank"
@@ -39,7 +39,7 @@ export default function Links() {
                     </p>
                 </li>
                 <li className="mb-2">
-                    <p className="font-medium text-lg">
+                    <p className="text-lg">
                         <Link
                             href="https://yufeiding.ucsd.edu/"
                             target="_blank"
@@ -51,7 +51,7 @@ export default function Links() {
                     </p>
                 </li>
                 <li className="mb-2">
-                    <p className="font-medium text-lg">
+                    <p className="text-lg">
                         <Link
                             href="https://iplusplus.club/"
                             target="_blank"
@@ -69,7 +69,7 @@ export default function Links() {
             </h3>
             <ul className="list-disc list-outside pl-4">
                 <li className="mb-2">
-                    <p className="font-medium text-lg">
+                    <p className="text-lg">
                         <Link
                             href="https://www.harkerhand.cn/"
                             target="_blank"
@@ -81,7 +81,7 @@ export default function Links() {
                     </p>
                 </li>
                 <li className="mb-2">
-                    <p className="font-medium text-lg">
+                    <p className="text-lg">
                         <Link
                             href="https://xelinquency.github.io/"
                             target="_blank"
@@ -93,7 +93,7 @@ export default function Links() {
                     </p>
                 </li>
                 <li className="mb-2">
-                    <p className="font-medium text-lg">
+                    <p className="text-lg">
                         <Link
                             href="https://winnie0jia7.github.io/"
                             target="_blank"
