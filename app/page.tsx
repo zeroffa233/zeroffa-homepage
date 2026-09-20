@@ -155,7 +155,7 @@ function Publications() {
             </h2>
             <ul className="list-disc list-outside pl-4">
                 <li className="mb-2">
-                    <p className="font-medium">
+                    <p className="font-medium text-base">
                         <Link
                             href="https://doi.org/10.1109/ICPADS67057.2025.11323001"
                             target="_blank"
@@ -172,12 +172,12 @@ function Publications() {
                         Jianping Huang, Feng Shan<sup>*</sup>, and Yun Wang.
                     </p>
 
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    <p className="text-base text-neutral-500 dark:text-neutral-400">
                         IEEE Transactions on Services Computing (TSC) · CCF-A
                     </p>
                 </li>
                 <li className="mb-2">
-                    <p className="font-medium">
+                    <p className="font-medium text-base">
                         <Link
                             href="#"
                             target="_blank"
@@ -194,7 +194,7 @@ function Publications() {
                         Jianping Huang.
                     </p>
 
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                    <p className="text-base text-neutral-500 dark:text-neutral-400">
                         31st IEEE International Conference on Parallel and
                         Distributed Systems (ICPADS 2025) · CCF-C
                     </p>
