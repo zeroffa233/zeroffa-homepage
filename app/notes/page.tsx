@@ -12,29 +12,33 @@ function EntryList({
     const linkClass =
         "text-lg transition-all hover:text-[#0047AB] dark:hover:text-blue-400";
     if (variant === "papers") {
-        // Papers：标题在前，后接日期与录用信息（斜体），同行自然排布
+        // Papers：无标号，日期开头（同博客），会议斜体置末
         return (
-            <ul className="list-disc list-outside pl-5 text-lg">
+            <div>
                 {notes.map((note) => (
-                    <li key={note.slug} className="mb-2">
-                        <Link href={`/notes/${note.slug}`} className={linkClass}>
-                            {note.title}
-                        </Link>
+                    <div
+                        key={note.slug}
+                        className="mb-2 flex items-baseline gap-4"
+                    >
                         {note.date && (
-                            <span className="ml-5 text-lg text-neutral-500 dark:text-neutral-400">
-                                {" "}
+                            <span className="shrink-0 tabular-nums text-lg text-neutral-500 dark:text-neutral-400">
                                 {formatDate(note.date)}
                             </span>
                         )}
+                        <Link
+                            href={`/notes/${note.slug}`}
+                            className={`min-w-0 flex-1 ${linkClass}`}
+                        >
+                            {note.title}
+                        </Link>
                         {note.acceptedBy && (
-                            <span className="ml-5 text-lg italic text-neutral-500 dark:text-neutral-400">
-                                {" "}
+                            <span className="shrink-0 text-lg italic text-neutral-500 dark:text-neutral-400">
                                 {note.acceptedBy}
                             </span>
                         )}
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         );
     }
     // 其他分区：单行，标题居左、日期靠右
