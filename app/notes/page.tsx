@@ -4,7 +4,7 @@ import { getNotesStructure, NoteListItem } from "app/notes/utils";
 
 function EntryList({ notes }: { notes: NoteListItem[] }) {
     return (
-        <ol className="list-decimal list-outside pl-5 text-lg">
+        <ul className="list-disc list-outside pl-5 text-lg">
             {notes.map((note) => (
                 <li key={note.slug} className="mb-2">
                     <div className="flex justify-between items-baseline">
@@ -22,7 +22,7 @@ function EntryList({ notes }: { notes: NoteListItem[] }) {
                     </div>
                 </li>
             ))}
-        </ol>
+        </ul>
     );
 }
 
