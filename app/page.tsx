@@ -154,7 +154,7 @@ function Publications() {
                 Publications
             </h2>
             <ul className="list-disc list-outside pl-4">
-                <li className="mb-2 space-y-1">
+                <li className="mb-2">
                     <p className="font-medium text-lg">
                         <Link
                             href="https://doi.org/10.1109/ICPADS67057.2025.11323001"
@@ -176,7 +176,7 @@ function Publications() {
                         IEEE Transactions on Services Computing (TSC) · CCF-A
                     </p>
                 </li>
-                <li className="mb-2 space-y-1">
+                <li className="mb-2">
                     <p className="font-medium text-lg">
                         <Link
                             href="#"
