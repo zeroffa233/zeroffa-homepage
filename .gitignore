@@ -40,6 +40,9 @@ Thumbs.db
 # VPS deploy infra (nginx config contains private subdomains/ports)
 .deploy/
 
+# Obsidian
+posts/.obsidian/
+
 # Generated from posts/blog/<slug>/ by scripts/copy-post-assets.mjs
 public/blog-assets/
 
