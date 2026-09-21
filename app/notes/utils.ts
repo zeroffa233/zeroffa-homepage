@@ -129,8 +129,7 @@ function collectInto(
                 title: meta.title ?? slug,
                 date: meta.date ?? meta.publishedAt,
                 acceptedBy: meta.acceptedBy,
-conflict://1
-1: @theirs
+                content: escaped,
             }
             if (group) {
                 if (!sectionData.groups.has(group)) {
