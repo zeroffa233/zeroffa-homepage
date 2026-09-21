@@ -107,7 +107,10 @@ export function normalizeObsidianRefs(
 }
 
 export function escapeBracesOutsideCode(content: string) {
-    const segments = content.split(/(```[\s\S]*?```|`[^`\n]*`)/g)
+    // 代码块/行内代码/数学公式（$..$、$$..$$）中的花括号原样保留
+    const segments = content.split(
+        /(```[\s\S]*?```|`[^`\n]*`|\$\$[\s\S]*?\$\$|\$[^$\n]*\$)/g,
+    )
     return segments
         .map((segment, i) =>
             i % 2 === 1
