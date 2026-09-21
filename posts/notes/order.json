@@ -1,4 +1,9 @@
 {
-  "sections": { "papers": 3, "books": 2, "projects": 1, "misc": 0 },
+  "sections": {
+    "papers": { "priority": 3, "sort": "date-desc" },
+    "books": 2,
+    "projects": 1,
+    "misc": 0
+  },
   "groups": {}
 }

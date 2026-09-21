@@ -19,6 +19,7 @@ export type NoteListItem = {
     group?: string
     title: string
     date?: string
+    acceptedBy?: string
     content: string
 }
 
@@ -30,9 +31,22 @@ export type NoteSection = {
     groups: NoteGroup[]
 }
 
+type SectionSort = 'date-asc' | 'date-desc'
+
 type OrderConfig = {
-    sections?: Record<string, number>
+    sections?: Record<string, number | { priority?: number; sort?: SectionSort }>
     groups?: Record<string, number>
+}
+
+function sectionConfig(
+    order: OrderConfig,
+    name: string,
+): { priority: number; sort: SectionSort } {
+    const value = order.sections?.[name]
+    if (typeof value === 'number') return { priority: value, sort: 'date-asc' }
+    if (value && typeof value === 'object')
+        return { priority: value.priority ?? -1, sort: value.sort ?? 'date-asc' }
+    return { priority: -1, sort: 'date-asc' }
 }
 
 function getOrderConfig(): OrderConfig {
@@ -48,12 +62,14 @@ export function getSectionTitle(dir: string) {
     return dir.charAt(0).toUpperCase() + dir.slice(1)
 }
 
-function sortEntries(notes: NoteListItem[]) {
-    return [...notes].sort(
-        (a, b) =>
-            (a.date ?? '').localeCompare(b.date ?? '') ||
-            a.title.localeCompare(b.title),
-    )
+function sortEntries(notes: NoteListItem[], mode: SectionSort = 'date-asc') {
+    return [...notes].sort((a, b) => {
+        const dateCmp =
+            mode === 'date-desc'
+                ? (b.date ?? '').localeCompare(a.date ?? '')
+                : (a.date ?? '').localeCompare(b.date ?? '')
+        return dateCmp || a.title.localeCompare(b.title)
+    })
 }
 
 // 递归收集全部笔记；segs 为相对 NOTES_ROOT 的文件夹层级
@@ -103,7 +119,8 @@ function collectInto(
                 section,
                 group,
                 title: meta.title ?? slug,
-                date: meta.date,
+                date: meta.date ?? meta.publishedAt,
+                acceptedBy: meta.acceptedBy,
                 content: rewritten,
             }
             if (group) {
@@ -131,11 +148,12 @@ export function getNotesStructure(): NoteSection[] {
 
     const result: NoteSection[] = []
     for (const [name, data] of Array.from(raw.entries())) {
+        const config = sectionConfig(order, name)
         const sortedGroups = Array.from(data.groups.entries())
             .map(([groupName, notes]) => ({
                 name: groupName,
                 priority: order.groups?.[`${name}/${groupName}`] ?? -1,
-                notes: sortEntries(notes),
+                notes: sortEntries(notes, config.sort),
             }))
             .sort(
                 (a, b) =>
@@ -144,7 +162,7 @@ export function getNotesStructure(): NoteSection[] {
         result.push({
             name,
             title: getSectionTitle(name),
-            flat: sortEntries(data.flat),
+            flat: sortEntries(data.flat, config.sort),
             groups: sortedGroups.map(({ name: gName, notes: gNotes }) => ({
                 name: gName,
                 notes: gNotes,
@@ -153,8 +171,8 @@ export function getNotesStructure(): NoteSection[] {
     }
     result.sort(
         (a, b) =>
-            (order.sections?.[b.name] ?? -1) -
-                (order.sections?.[a.name] ?? -1) ||
+            sectionConfig(order, b.name).priority -
+                sectionConfig(order, a.name).priority ||
             a.title.localeCompare(b.title),
     )
     return result

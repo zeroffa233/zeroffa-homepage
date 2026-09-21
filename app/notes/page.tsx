@@ -14,11 +14,18 @@ function EntryList({ notes }: { notes: NoteListItem[] }) {
                         >
                             {note.title}
                         </Link>
-                        {note.date && (
-                            <span className="text-lg text-neutral-500 dark:text-neutral-400">
-                                {formatDate(note.date)}
-                            </span>
-                        )}
+                        <div className="flex items-baseline gap-4">
+                            {note.acceptedBy && (
+                                <span className="italic text-lg text-neutral-500 dark:text-neutral-400">
+                                    {note.acceptedBy}
+                                </span>
+                            )}
+                            {note.date && (
+                                <span className="text-lg text-neutral-500 dark:text-neutral-400">
+                                    {formatDate(note.date)}
+                                </span>
+                            )}
+                        </div>
                     </div>
                 </li>
             ))}
