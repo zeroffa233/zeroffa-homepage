@@ -179,7 +179,7 @@ function Publications() {
                 <li className="mb-2">
                     <p className="font-medium text-lg">
                         <Link
-                            href="#"
+                            href="https://doi.org/10.1109/ICPADS67057.2025.11323001"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
