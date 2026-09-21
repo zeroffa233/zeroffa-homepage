@@ -11,7 +11,11 @@ type Metadata = {
 export function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
   let match = frontmatterRegex.exec(fileContent)
-  let frontMatterBlock = match![1]
+  if (!match) {
+    // 没有/frontmatter 不完整：整篇当作正文，元数据留空
+    return { metadata: {} as Metadata, content: fileContent.trim() }
+  }
+  let frontMatterBlock = match[1]
   let content = fileContent.replace(frontmatterRegex, '').trim()
   let frontMatterLines = frontMatterBlock.trim().split('\n')
   let metadata: Partial<Metadata> = {}
