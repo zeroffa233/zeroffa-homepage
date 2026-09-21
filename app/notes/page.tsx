@@ -2,30 +2,55 @@ import Link from "next/link";
 import { formatDate } from "app/blog/utils";
 import { getNotesStructure, NoteListItem } from "app/notes/utils";
 
-function EntryList({ notes }: { notes: NoteListItem[] }) {
-    return (
-        <ul className="list-disc list-outside pl-5 text-lg">
-            {notes.map((note) => (
-                <li key={note.slug} className="mb-2">
-                    <div className="flex items-end justify-between gap-4">
-                        <Link
-                            href={`/notes/${note.slug}`}
-                            className="text-lg transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
-                        >
-                            {note.title}
-                        </Link>
-                        <div className="flex shrink-0 items-baseline gap-4 whitespace-nowrap">
-                            {note.acceptedBy && (
-                                <span className="italic text-lg text-neutral-500 dark:text-neutral-400">
-                                    {note.acceptedBy}
-                                </span>
-                            )}
+function EntryList({
+    notes,
+    variant = "default",
+}: {
+    notes: NoteListItem[];
+    variant?: "default" | "papers";
+}) {
+    const linkClass =
+        "text-lg transition-all hover:text-[#0047AB] dark:hover:text-blue-400";
+    if (variant === "papers") {
+        // Papers：首行日期/录用信息，第二行标题
+        return (
+            <ul className="list-disc list-outside pl-5 text-lg">
+                {notes.map((note) => (
+                    <li key={note.slug} className="mb-2">
+                        <div className="flex items-baseline gap-4">
                             {note.date && (
                                 <span className="text-lg text-neutral-500 dark:text-neutral-400">
                                     {formatDate(note.date)}
                                 </span>
                             )}
+                            {note.acceptedBy && (
+                                <span className="text-lg italic text-neutral-500 dark:text-neutral-400">
+                                    {note.acceptedBy}
+                                </span>
+                            )}
                         </div>
+                        <Link href={`/notes/${note.slug}`} className={linkClass}>
+                            {note.title}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        );
+    }
+    // 其他分区：单行，标题居左、日期靠右
+    return (
+        <ul className="list-disc list-outside pl-5 text-lg">
+            {notes.map((note) => (
+                <li key={note.slug} className="mb-2">
+                    <div className="flex justify-between items-baseline">
+                        <Link href={`/notes/${note.slug}`} className={linkClass}>
+                            {note.title}
+                        </Link>
+                        {note.date && (
+                            <span className="text-lg text-neutral-500 dark:text-neutral-400">
+                                {formatDate(note.date)}
+                            </span>
+                        )}
                     </div>
                 </li>
             ))}
@@ -52,11 +77,16 @@ export default function Notes() {
                     <h3 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 mb-3">
                         {title}
                     </h3>
-                    {flat.length > 0 && <EntryList notes={flat} />}
+                    {flat.length > 0 && (
+                        <EntryList notes={flat} variant={name === "papers" ? "papers" : "default"} />
+                    )}
                     {groups.map(({ name: group, notes }) => (
                         <div key={group} className="mt-5">
                             <p className="text-lg font-semibold mb-2">{group}</p>
-                            <EntryList notes={notes} />
+                            <EntryList
+                                notes={notes}
+                                variant={name === "papers" ? "papers" : "default"}
+                            />
                         </div>
                     ))}
                 </div>
