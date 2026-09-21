@@ -105,6 +105,24 @@ export default function Links() {
                     </p>
                 </li>
             </ul>
+            <hr className="my-5 border-neutral-500 dark:border-neutral-500"></hr>
+            <h3 className="text-[#0047AB] text-2xl font-bold tracking-tight dark:text-neutral-100 mb-3">
+                Misc
+            </h3>
+            <ul className="list-disc list-outside pl-4">
+                <li className="mb-2">
+                    <p className="text-lg">
+                        <Link
+                            href="https://mml-book.github.io/book/mml-book.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-all hover:text-[#0047AB] dark:hover:text-blue-400"
+                        >
+                            Mathematics for Machine Learning
+                        </Link>
+                    </p>
+                </li>
+            </ul>
         </section>
     );
 }
