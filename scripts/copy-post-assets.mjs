@@ -34,6 +34,7 @@ function mirrorTree(src, dest) {
             fs.mkdirSync(destPath, { recursive: true })
             mirrorTree(srcPath, destPath)
         } else if (
+            !entry.name.endsWith('.md') &&
             !entry.name.endsWith('.mdx') &&
             !entry.name.startsWith('.') &&
             entry.name !== 'order.json'

@@ -73,8 +73,14 @@ function collectInto(
         const full = path.join(dir, entry.name)
         if (entry.isDirectory()) {
             collectInto(sections, full, [...segs, entry.name], order, seenSlugs)
-        } else if (entry.name.endsWith('.mdx') && segs.length > 0) {
-            const slug = path.basename(entry.name, '.mdx')
+        } else if (
+            (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) &&
+            segs.length > 0
+        ) {
+            const slug = path.basename(
+                entry.name,
+                path.extname(entry.name),
+            )
             if (seenSlugs.has(slug)) {
                 console.warn(
                     `[notes] duplicate slug "${slug}" (${entry.name}, first seen at ${seenSlugs.get(slug)}) skipped`,
@@ -162,9 +168,20 @@ export function getNoteList(): NoteListItem[] {
 export function getNote(slug: string) {
     const note = getNoteList().find((n) => n.slug === slug)
     if (!note) return null
-    const rel = [note.section, note.group, `${slug}.mdx`].filter(Boolean).join('/')
-    const { metadata, content } = parseFrontmatter(
-        fs.readFileSync(path.join(NOTES_ROOT, rel), 'utf-8'),
-    )
-    return { metadata: metadata as Record<string, string | undefined>, content }
+    for (const ext of ['.md', '.mdx']) {
+        const rel = [note.section, note.group, `${slug}${ext}`]
+            .filter(Boolean)
+            .join('/')
+        const full = path.join(NOTES_ROOT, rel)
+        if (fs.existsSync(full)) {
+            const { metadata, content } = parseFrontmatter(
+                fs.readFileSync(full, 'utf-8'),
+            )
+            return {
+                metadata: metadata as Record<string, string | undefined>,
+                content,
+            }
+        }
+    }
+    return null
 }
