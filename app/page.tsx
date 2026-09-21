@@ -68,9 +68,9 @@ function ProfileCard() {
                     </Link>
                 </div>
                 <p className="italic text-lg text-neutral-500 dark:text-neutral-400 text-right">
-                    “江南雨，落如花满地，飘零。”
+                    “沉舟侧畔千帆过，病树前头万木春。”
                     <br />
-                    ——《辞梦烟雨》
+                    ——刘禹锡《酬乐天扬州初逢席上见赠》
                 </p>
             </div>
         </section>
