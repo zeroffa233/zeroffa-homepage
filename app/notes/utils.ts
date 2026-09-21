@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { parseFrontmatter } from 'app/blog/utils'
+import { parseFrontmatter, rewriteRelativeRefs } from 'app/blog/utils'
 
 // Notes 目录结构（文件夹即分类，全部自动计算）：
 //   posts/notes/<分类>/<slug>.mdx           ← 无小分组，直接平铺
@@ -19,6 +19,7 @@ export type NoteListItem = {
     group?: string
     title: string
     date?: string
+    content: string
 }
 
 export type NoteGroup = { name: string; notes: NoteListItem[] }
@@ -88,8 +89,9 @@ function collectInto(
                 continue
             }
             seenSlugs.set(slug, entry.name)
-            const { metadata } = parseFrontmatter(fs.readFileSync(full, 'utf-8'))
+            const { metadata, content } = parseFrontmatter(fs.readFileSync(full, 'utf-8'))
             const meta = metadata as Record<string, string | undefined>
+            const rewritten = rewriteRelativeRefs(content, full, NOTES_ROOT, '/notes-assets')
             const section = segs[0]
             const group = segs[1]
             if (!sections.has(section)) {
@@ -102,6 +104,7 @@ function collectInto(
                 group,
                 title: meta.title ?? slug,
                 date: meta.date,
+                content: rewritten,
             }
             if (group) {
                 if (!sectionData.groups.has(group)) {
@@ -168,20 +171,8 @@ export function getNoteList(): NoteListItem[] {
 export function getNote(slug: string) {
     const note = getNoteList().find((n) => n.slug === slug)
     if (!note) return null
-    for (const ext of ['.md', '.mdx']) {
-        const rel = [note.section, note.group, `${slug}${ext}`]
-            .filter(Boolean)
-            .join('/')
-        const full = path.join(NOTES_ROOT, rel)
-        if (fs.existsSync(full)) {
-            const { metadata, content } = parseFrontmatter(
-                fs.readFileSync(full, 'utf-8'),
-            )
-            return {
-                metadata: metadata as Record<string, string | undefined>,
-                content,
-            }
-        }
+    return {
+        metadata: { title: note.title, date: note.date },
+        content: note.content,
     }
-    return null
 }

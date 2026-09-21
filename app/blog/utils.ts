@@ -8,6 +8,48 @@ type Metadata = {
   image?: string
 }
 
+// 将 md 内指向本地附件的相对引用改写为镜像后的公开路径。
+// 支持两种解析：相对 md 所在目录、相对库根目录；只改写真实存在的文件。
+function decodeURIComponentSafe(s: string) {
+    try {
+        return decodeURIComponent(s)
+    } catch {
+        return s
+    }
+}
+
+export function rewriteRelativeRefs(
+    content: string,
+    mdAbsPath: string,
+    rootDir: string,
+    publicBase: string,
+) {
+    const mdDir = path.dirname(mdAbsPath)
+    return content.replace(
+        /(!?\[[^\]]*\]\()([^)\s]+)(\))/g,
+        (whole, prefix: string, target: string, suffix: string) => {
+            if (/^(https?:|\/|#|mailto:)/.test(target)) return whole
+            const decoded = decodeURIComponentSafe(target)
+            for (const base of [mdDir, rootDir]) {
+                const resolved = path.resolve(base, decoded)
+                if (
+                    resolved.startsWith(rootDir) &&
+                    fs.existsSync(resolved) &&
+                    fs.statSync(resolved).isFile()
+                ) {
+                    const rel = path
+                        .relative(rootDir, resolved)
+                        .split(path.sep)
+                        .join('/')
+                    const url = publicBase + '/' + rel.replace(/ /g, '%20')
+                    return `${prefix}${url}${suffix}`
+                }
+            }
+            return whole
+        },
+    )
+}
+
 export function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
   let match = frontmatterRegex.exec(fileContent)
@@ -44,7 +86,9 @@ function readMDXFile(filePath) {
 function getMDXData(dir) {
   let mdxFiles = getMDXFiles(dir)
   return mdxFiles.map((file) => {
-    let { metadata, content } = readMDXFile(path.join(dir, file))
+    let absPath = path.join(dir, file)
+    let { metadata, content } = readMDXFile(absPath)
+    content = rewriteRelativeRefs(content, absPath, dir, '/blog-assets')
     let slug = path.basename(file, path.extname(file))
 
     return {

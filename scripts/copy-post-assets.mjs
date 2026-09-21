@@ -9,11 +9,18 @@ const blogDest = path.join(process.cwd(), 'public', 'blog-assets')
 
 fs.rmSync(blogDest, { recursive: true, force: true })
 for (const entry of fs.readdirSync(blogSrc, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue
-    fs.cpSync(path.join(blogSrc, entry.name), path.join(blogDest, entry.name), {
-        recursive: true,
-    })
-    console.log(`copied post assets: ${entry.name}`)
+    const srcPath = path.join(blogSrc, entry.name)
+    const destPath = path.join(blogDest, entry.name)
+    if (entry.isDirectory()) {
+        fs.cpSync(srcPath, destPath, { recursive: true })
+        console.log(`copied post assets: ${entry.name}`)
+    } else if (
+        !entry.name.endsWith('.md') &&
+        !entry.name.endsWith('.mdx') &&
+        !entry.name.startsWith('.')
+    ) {
+        fs.copyFileSync(srcPath, destPath)
+    }
 }
 
 const notesSrc = path.join(process.cwd(), 'posts', 'notes')
