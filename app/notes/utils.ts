@@ -5,6 +5,7 @@ import {
     normalizeObsidianRefs,
     rewriteRelativeRefs,
     escapeBracesOutsideCode,
+    expandDisplayMath,
 } from 'app/blog/utils'
 
 // Notes 目录结构（文件夹即分类，全部自动计算）：
@@ -112,8 +113,9 @@ function collectInto(
             seenSlugs.set(slug, entry.name)
             const { metadata, content } = parseFrontmatter(fs.readFileSync(full, 'utf-8'))
             const meta = metadata as Record<string, string | undefined>
+            const expanded = expandDisplayMath(content)
             const vaultRoot = path.join(process.cwd(), 'posts')
-            const normalized = normalizeObsidianRefs(content, full, NOTES_ROOT, '/notes-assets', vaultRoot)
+            const normalized = normalizeObsidianRefs(expanded, full, NOTES_ROOT, '/notes-assets', vaultRoot)
             const rewritten = rewriteRelativeRefs(normalized, full, NOTES_ROOT, '/notes-assets')
             const escaped = escapeBracesOutsideCode(rewritten)
             const section = segs[0]

@@ -120,6 +120,21 @@ export function escapeBracesOutsideCode(content: string) {
         .join('')
 }
 
+// remark-math v6 会把单行 $$..$$ 解析为行内公式（无 katex-display 包裹、高度受行高压制），
+// 逐行展开为多行以保证以块级公式渲染（逐行处理避免跨行正则把相邻公式黏连）
+export function expandDisplayMath(content: string) {
+    return content
+        .split('\n')
+        .map((line) => {
+            const t = line.trim()
+            if (t.startsWith('$$') && t.endsWith('$$') && t.length > 4) {
+                return '$$\n' + t.slice(2, -2).trim() + '\n$$'
+            }
+            return line
+        })
+        .join('\n')
+}
+
 export function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
   let match = frontmatterRegex.exec(fileContent)
@@ -159,6 +174,7 @@ function getMDXData(dir) {
   return mdxFiles.map((file) => {
     let absPath = path.join(dir, file)
     let { metadata, content } = readMDXFile(absPath)
+    content = expandDisplayMath(content)
     content = normalizeObsidianRefs(content, absPath, dir, '/blog-assets', vaultRoot)
     content = rewriteRelativeRefs(content, absPath, dir, '/blog-assets')
     content = escapeBracesOutsideCode(content)
