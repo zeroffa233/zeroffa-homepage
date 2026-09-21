@@ -1,7 +1,8 @@
 {
   "sections": {
-    "papers": { "priority": 3, "sort": "date-desc" },
+    "papers": 3,
     "books": 2,
+    "courses": 1.5,
     "projects": 1,
     "misc": 0
   },
