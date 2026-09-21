@@ -70,7 +70,7 @@ function ProfileCard() {
                 <p className="italic text-lg text-neutral-500 dark:text-neutral-400 text-right">
                     “沉舟侧畔千帆过，病树前头万木春。”
                     <br />
-                    ——刘禹锡《酬乐天扬州初逢席上见赠》
+                    ——刘禹锡
                 </p>
             </div>
         </section>
