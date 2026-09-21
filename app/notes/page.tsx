@@ -12,26 +12,26 @@ function EntryList({
     const linkClass =
         "text-lg transition-all hover:text-[#0047AB] dark:hover:text-blue-400";
     if (variant === "papers") {
-        // Papers：首行日期/录用信息，第二行标题
+        // Papers：标题在前，后接日期与录用信息（斜体），同行自然排布
         return (
             <ul className="list-disc list-outside pl-5 text-lg">
                 {notes.map((note) => (
                     <li key={note.slug} className="mb-2">
-                        <div className="flex items-baseline gap-4">
-                            {note.date && (
-                                <span className="text-lg text-neutral-500 dark:text-neutral-400">
-                                    {formatDate(note.date)}
-                                </span>
-                            )}
-                            {note.acceptedBy && (
-                                <span className="text-lg italic text-neutral-500 dark:text-neutral-400">
-                                    {note.acceptedBy}
-                                </span>
-                            )}
-                        </div>
                         <Link href={`/notes/${note.slug}`} className={linkClass}>
                             {note.title}
                         </Link>
+                        {note.date && (
+                            <span className="text-lg text-neutral-500 dark:text-neutral-400">
+                                {" "}
+                                {formatDate(note.date)}
+                            </span>
+                        )}
+                        {note.acceptedBy && (
+                            <span className="text-lg italic text-neutral-500 dark:text-neutral-400">
+                                {" "}
+                                {note.acceptedBy}
+                            </span>
+                        )}
                     </li>
                 ))}
             </ul>
