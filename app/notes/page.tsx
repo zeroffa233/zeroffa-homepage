@@ -21,13 +21,13 @@ function EntryList({
                             {note.title}
                         </Link>
                         {note.date && (
-                            <span className="text-lg text-neutral-500 dark:text-neutral-400">
+                            <span className="ml-3 text-lg text-neutral-500 dark:text-neutral-400">
                                 {" "}
                                 {formatDate(note.date)}
                             </span>
                         )}
                         {note.acceptedBy && (
-                            <span className="text-lg italic text-neutral-500 dark:text-neutral-400">
+                            <span className="ml-3 text-lg italic text-neutral-500 dark:text-neutral-400">
                                 {" "}
                                 {note.acceptedBy}
                             </span>
