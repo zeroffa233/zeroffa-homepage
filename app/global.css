@@ -120,6 +120,10 @@ html {
   @apply my-4;
 }
 
+.prose .katex {
+  font-size: 1em;
+}
+
 .prose p {
   @apply my-4 text-neutral-800 dark:text-neutral-200;
 }
