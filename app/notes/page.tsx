@@ -27,7 +27,7 @@ function EntryList({
                             </span>
                         )}
                         {note.acceptedBy && (
-                            <span className="ml-2 text-lg italic text-neutral-500 dark:text-neutral-400">
+                            <span className="ml-5 text-lg italic text-neutral-500 dark:text-neutral-400">
                                 {" "}
                                 {note.acceptedBy}
                             </span>
