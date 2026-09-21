@@ -6,7 +6,7 @@ acceptedBy: NeurIPS 2026
 
 **Abstract:** Computational fluid dynamics (CFD) has been the main workhorse of computational physics, yet its steep learning curve and fragmented, multi-stage workflow create significant barriers to entry. We present Foam-Agent, a multi-agent framework that leverages large language models (LLMs) to automate the end-to-end CFD workflow in OpenFOAM from a single natural-language prompt. Foam-Agent rests on three methodological contributions. First, a multi-index retrieval scheme organizes domain knowledge along four complementary structural dimensions and selects indices by workflow stage, sharpening retrieval precision over conventional single-index retrieval-augmented generation. Second, dependency-aware file generation is formulated as a topological traversal of the OpenFOAM case dependency graph, so that each configuration file is synthesized in the context of its already-generated predecessors, enforcing cross-file consistency. Third, a trajectory-conditioned reviewer loop iteratively repairs failed runs by conditioning each correction on the accumulated error-and-diagnosis trajectory of its own previous attempts, applying at each step a minimal configuration edit that targets a reduced solver-error set. Around these contributions, six specialist agents span planning, meshing, file writing, execution, review, and visualization; Foam-Agent additionally exposes its capabilities through the Model Context Protocol as a deployment surface for external orchestrators. On FoamBench, FoamAgent achieves an 88.2% execution success rate on the 110 Basic-tier tasks and 62.5% on the outof-distribution Advanced tier, 1.6× and 5× those of the prior MetaOpenFOAM framework, both with Claude 3.5 Sonnet, all without expert intervention, and we report a complementary fieldlevel fidelity metric to distinguish crash-free execution from solution accuracy. These results demonstrate how the strategic harnessing of specialized multi-agent systems can reduce expertise barriers while preserving the rigor of solver-based simulation workflows.
 
-# 背景
+# 1 背景
 
 - **CFD 的地位**：计算物理的主力工具，广泛用于飞行器、风机、血流模拟等，可替代昂贵的物理原型实验
 - **使用门槛高**：OpenFOAM 流程多阶段且碎片化
@@ -19,9 +19,9 @@ acceptedBy: NeurIPS 2026
 - **CFD 领域的先行工作**：MetaOpenFOAM、OpenFOAMGPT，基于 RAG 检索教程案例，将自然语言翻译为 OpenFOAM 配置文件
 
 
-# 动机
+# 2 动机
 
-## 已有工作的缺陷
+## 2.1 已有工作的缺陷
 
 1. **流程覆盖不全**：只处理求解器配置，忽略最耗时的前处理（复杂几何网格）和后处理（可视化）
 2. **单体架构**：无法只调用某个环节（如单独调试一个配置文件），难以嵌入更大的科研工作流
@@ -29,7 +29,7 @@ acceptedBy: NeurIPS 2026
 
 > **难点根源**：OpenFOAM 案例由大量相互引用的文件组成。system/（求解控制、数值格式）约束 constant/（物性、湍流模型），constant/ 又约束 0/（初始和边界条件）。若逐个独立生成，容易出现字段名不匹配、单位错误、引用未定义变量等问题。同时，自然语言与 OpenFOAM 术语之间存在语义鸿沟，单一检索噪声大。
 
-## 解决思路
+## 2.2 解决思路
 
 | 缺陷     | Foam-Agent 的方案                                                   | 对应实验                         |
 | ------ | ---------------------------------------------------------------- | ---------------------------- |
@@ -37,9 +37,9 @@ acceptedBy: NeurIPS 2026
 | 单体架构   | 基于 MCP 拆分为 11 个原子函数，由 LangGraph 或外部编排器调度                         | 3.7 NACA0012 编排演示            |
 | 可靠性不足  | 依赖感知文件生成 + 分层多索引 RAG + Reviewer 迭代纠错                             | 3.2 主结果、3.3 消融               |
 
-# 方法
+# 3 方法
 
-## 整体流程
+## 3.1 整体流程
 
 ![[Pasted image 20260921193135.png]]
 
@@ -54,7 +54,7 @@ acceptedBy: NeurIPS 2026
 
 > **Algorithm 1 要点**：每轮失败后，ErrorParser 把日志解析为结构化错误 Eₜ，Reviewer 基于错误、当前配置和历史 H 计算补丁 Δₜ，更新配置 Cₜ = Cₜ₋₁ ⊕ Δₜ，并把 (Cₜ₋₁, Cₜ, Δₜ) 写入历史，防止来回修改同一处。
 
-## 六个 Agent
+## 3.2 六个 Agent
 
 |Agent|输入 → 输出|关键设计|形式化|
 |---|---|---|---|
@@ -65,7 +65,7 @@ acceptedBy: NeurIPS 2026
 |Reviewer|错误 + 文件 + 历史 → 补丁|错误上下文化；轨迹分析防止循环修正；禁止修改用户指定的参数|求在用户约束下消除错误的最小补丁 Δₜ|
 |Visualization|仿真结果 → png|从 prompt 解析目标物理量，写 PyVista/ParaView 脚本；报错时自修复，重试上限可配置|—|
 
-## 分层多索引检索
+## 3.3 分层多索引检索
 
 - **知识库来源**：解析 OpenFOAM 官方教程，提取四个维度
     - 案例元数据：名称、流动领域、物理类别、求解器
@@ -81,7 +81,7 @@ acceptedBy: NeurIPS 2026
 
 > **与单索引的区别**：单索引用一个键检索所有内容；分层检索以案例元数据为第一层键，再逐级叠加目录结构、案例名、求解器等信息，逐步收窄范围，降低噪声。
 
-## MCP 模块化
+## 3.4 MCP 模块化
 
 ![[Pasted image 20260921193219.png]]
 
@@ -95,7 +95,7 @@ acceptedBy: NeurIPS 2026
 - **可靠性保障**：所有函数 I/O 和图状态都用 Pydantic 强类型 schema 做运行时校验
 - **11 个函数**：create_case、plan_simulation_structure、generate_file_content、generate_mesh、generate_hpc_script、run_simulation、check_job_status、get_simulation_logs、review_and_suggest_fix、apply_fix、generate_visualization（其中网格、运行、可视化为异步，返回 job_id）
 
-## 组件之间的关系
+## 3.5 组件之间的关系
 
 |组件|作用环节|解决的问题|
 |---|---|---|
@@ -106,16 +106,16 @@ acceptedBy: NeurIPS 2026
 
 > 前两者减少初始错误，从而减少 Reviewer 的循环次数；Reviewer 保证最终成功率；MCP 与三者正交。
 
-# 实验
+# 4 实验
 
-## 设置
+## 4.1 设置
 
 - **基准**：CFDLLMBench，110 个 OpenFOAM 案例，覆盖 11 类物理场景；每个案例以自然语言描述问题、几何、求解器、边界条件和参数
 - **指标**：执行成功率（无人工干预下成功运行的比例）
 - **基线**：MetaOpenFOAM（OpenFOAMGPT 未开源，未纳入）
 - **模型**：Claude 3.5 Sonnet、GPT-4o
 
-## 主结果
+## 4.2 主结果
 
 ![[Pasted image 20260921193333.png]]
 
@@ -130,7 +130,7 @@ acceptedBy: NeurIPS 2026
 - **Wedge**（温度场）：基线连基本几何都没有重建正确
 - **ForwardStep**（速度幅值）：Foam-Agent 与真值几乎一致；基线速度整体偏低
 
-## 消融实验
+## 4.3 消融实验
 
 ![[Pasted image 20260921193355.png]]
 
@@ -150,7 +150,7 @@ acceptedBy: NeurIPS 2026
 > - 有 Reviewer 时，初始错误大多能被纠正，二者对成功率的影响变小
 > - 但文件依赖让 Reviewer 收敛更快（高温下循环次数减半），因此其主要价值在于减少 API 调用和运行时间
 
-## 能力演示
+## 4.4 能力演示
 
 |场景|对应图|设置|结论|
 |---|---|---|---|
@@ -159,7 +159,7 @@ acceptedBy: NeurIPS 2026
 |HPC 运行|{图7}|3D 顶盖驱动方腔，100³ 约百万网格，Perlmutter 集群，32 个子域|将集群文档（分区限制、模块命名、脚本头语法）注入上下文，生成有效 Slurm 脚本，避免幻觉指令|
 |MCP 编排|{图8}|以 Cursor 为编排器，NACA 0012 翼型|依次调用 generate_mesh → generate_file_content → generate_hpc_script → run_simulation → generate_visualization，端到端完成|
 
-## 结论与未来工作
+## 4.5 结论与未来工作
 
 - **结论**：分层 RAG、依赖感知生成、执行驱动的纠错和 MCP 模块化相结合，实现 CFD 全流程自动化，成功率 88.2%
 - **未来工作**：从“执行正确”走向“结果正确”，引入视觉语言模型解读可视化结果，与预期物理模式比对，形成闭环优化

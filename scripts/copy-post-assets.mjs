@@ -33,6 +33,16 @@ if (fs.existsSync(notesSrc)) {
     console.log('copied notes assets')
 }
 
+// 库根目录（posts/）下的散落文件（如 Obsidian 粘贴图片）也归入 notes-assets
+const vaultSrc = path.join(process.cwd(), 'posts')
+for (const entry of fs.readdirSync(vaultSrc, { withFileTypes: true })) {
+    if (entry.isDirectory()) continue
+    if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) continue
+    if (entry.name.startsWith('.') || entry.name === 'order.json') continue
+    fs.copyFileSync(path.join(vaultSrc, entry.name), path.join(notesDest, entry.name))
+    console.log(`copied vault root asset: ${entry.name}`)
+}
+
 function mirrorTree(src, dest) {
     for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
         const srcPath = path.join(src, entry.name)

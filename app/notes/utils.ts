@@ -1,6 +1,11 @@
 import fs from 'fs'
 import path from 'path'
-import { parseFrontmatter, rewriteRelativeRefs } from 'app/blog/utils'
+import {
+    parseFrontmatter,
+    normalizeObsidianRefs,
+    rewriteRelativeRefs,
+    escapeBracesOutsideCode,
+} from 'app/blog/utils'
 
 // Notes 目录结构（文件夹即分类，全部自动计算）：
 //   posts/notes/<分类>/<slug>.mdx           ← 无小分组，直接平铺
@@ -107,7 +112,10 @@ function collectInto(
             seenSlugs.set(slug, entry.name)
             const { metadata, content } = parseFrontmatter(fs.readFileSync(full, 'utf-8'))
             const meta = metadata as Record<string, string | undefined>
-            const rewritten = rewriteRelativeRefs(content, full, NOTES_ROOT, '/notes-assets')
+            const vaultRoot = path.join(process.cwd(), 'posts')
+            const normalized = normalizeObsidianRefs(content, full, NOTES_ROOT, '/notes-assets', vaultRoot)
+            const rewritten = rewriteRelativeRefs(normalized, full, NOTES_ROOT, '/notes-assets')
+            const escaped = escapeBracesOutsideCode(rewritten)
             const section = segs[0]
             const group = segs[1]
             if (!sections.has(section)) {
@@ -121,7 +129,8 @@ function collectInto(
                 title: meta.title ?? slug,
                 date: meta.date ?? meta.publishedAt,
                 acceptedBy: meta.acceptedBy,
-                content: rewritten,
+conflict://1
+1: @theirs
             }
             if (group) {
                 if (!sectionData.groups.has(group)) {
