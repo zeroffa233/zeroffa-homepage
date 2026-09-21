@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "byted-web-search": {
+      "source": "skills.volces.com",
+      "sourceUrl": "https://skills.volces.com/skills/bytedance/agentkit-samples",
+      "sourceType": "well-known",
+      "computedHash": "29157d5a79a70f5f3731498e927ee0be5dabecbdd77347a1971f60f417a6becd",
+      "wellKnownDigest": "sha256:0e468b8722e01203e714596b06098890e9626c7c2574a310714cac75e32f8179"
+    }
+  }
+}
