@@ -11,11 +11,11 @@ date: "2026-09-21"
 
 The chapter builds everything on three core concepts:
 
-|Concept|Meaning in this book|Key points|
-|---|---|---|
-|**Data**|Assumed to be numerical and represented as **vectors**|Real-world data such as text or images must first be converted into numbers. Choosing that representation, sometimes called feature engineering, matters a lot.|
-|**Model**|A description of the process that generates the data|A good model captures the relevant aspects of the true process and produces data similar to the real dataset.|
-|**Learning**|Automatically finding patterns and structure by **optimizing model parameters**|The goal is **generalization**: good performance on _unseen_ data, not just on the training data.|
+| Concept      | Meaning in this book                                                            | Key points                                                                                                                                                      |
+| ------------ | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Data**     | Assumed to be numerical and represented as **vectors**                          | Real-world data such as text or images must first be converted into numbers. Choosing that representation, sometimes called feature engineering, matters a lot. |
+| **Model**    | A description of the process that generates the data                            | A good model captures the relevant aspects of the true process and produces data similar to the real dataset.                                                   |
+| **Learning** | Automatically finding patterns and structure by **optimizing model parameters** | The goal is **generalization**: good performance on _unseen_ data, not just on the training data.                                                               |
 
 - **Three views of a vector.** The book deliberately keeps all three in mind:
     - Computer science view: an array of numbers.
