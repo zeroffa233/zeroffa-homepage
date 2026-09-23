@@ -115,7 +115,8 @@ export function escapeBracesOutsideCode(content: string) {
         .map((segment, i) =>
             i % 2 === 1
                 ? segment
-                : segment.replace(/([{}])/g, '\\$1'),
+                : // 跳过已被反斜杠转义的花括号，避免 \\{ 重新变成表达式
+                  segment.replace(/(?<!\\)([{}])/g, '\\$1'),
         )
         .join('')
 }
