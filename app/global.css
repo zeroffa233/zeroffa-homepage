@@ -185,6 +185,20 @@ table {
   white-space: nowrap;
 }
 
+/* 正文表格：边框 + 单元格内软换行 */
+.prose table {
+  @apply my-4 w-full border-collapse text-base;
+}
+
+.prose th,
+.prose td {
+  @apply border border-neutral-300 px-3 py-2 text-left align-top dark:border-neutral-600;
+}
+
+.prose th {
+  @apply bg-neutral-100 font-semibold dark:bg-neutral-800;
+}
+
 .title {
   text-wrap: balance;
 }
