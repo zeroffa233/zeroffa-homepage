@@ -41,7 +41,7 @@ acceptedBy: NeurIPS 2026
 
 ## 3.1 整体流程
 
-![[Pasted image 20260921193135.png]]
+![Pasted image 20260921193135.png](attachments/Pasted%20image%2020260921193135.png)
 
 主流程按顺序执行：
 
@@ -83,9 +83,9 @@ acceptedBy: NeurIPS 2026
 
 ## 3.4 MCP 模块化
 
-![[Pasted image 20260921193219.png]]
+![Pasted image 20260921193219.png](attachments/Pasted%20image%2020260921193219.png)
 
-![[Pasted image 20260921193249.png]]
+![Pasted image 20260921193249.png](attachments/Pasted%20image%2020260921193249.png)
 
 - **三个设计原则**
     - 原子性：每个函数只做一件事
@@ -117,7 +117,7 @@ acceptedBy: NeurIPS 2026
 
 ## 4.2 主结果
 
-![[Pasted image 20260921193333.png]]
+![Pasted image 20260921193333.png](attachments/Pasted%20image%2020260921193333.png)
 
 |框架|Claude 3.5 Sonnet|GPT-4o|
 |---|---|---|
@@ -132,7 +132,7 @@ acceptedBy: NeurIPS 2026
 
 ## 4.3 消融实验
 
-![[Pasted image 20260921193355.png]]
+![Pasted image 20260921193355.png](attachments/Pasted%20image%2020260921193355.png)
 
 均使用 Claude 3.5 Sonnet，温度分别取 T = 0 和 T = 0.6。
 
