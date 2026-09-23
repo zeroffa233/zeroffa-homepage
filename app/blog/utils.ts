@@ -92,7 +92,7 @@ export function normalizeObsidianRefs(
                 byName.get(target) ??
                 byName.get(decodeURIComponentSafe(target)) ??
                 byName.get(path.basename(decodeURIComponentSafe(target)))
-            if (!resolved || !resolved.startsWith(rootDir)) {
+            if (!resolved) {
                 // 解析不到的链接退化为纯文本，避免 MDX 解析崩溃
                 return displayRaw ?? target
             }
