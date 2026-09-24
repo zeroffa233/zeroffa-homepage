@@ -68,9 +68,11 @@ function ProfileCard() {
                     </Link>
                 </div>
                 <p className="italic text-lg text-neutral-500 dark:text-neutral-400 text-right">
-                    “沉舟侧畔千帆过，病树前头万木春。”
+                    “自己想通了，无所谓别人怎么讲。
                     <br />
-                    ——刘禹锡
+                    自己想不通，才要一直问别人的看法。”
+                    <br />
+                    ——HuhuMeow
                 </p>
             </div>
         </section>
