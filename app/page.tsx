@@ -47,7 +47,7 @@ function ProfileCard() {
                     Email: baixinwan@seu.edu.cn
                 </p>
             </div>
-            <div className="flex flex-col justify-between items-end ml-auto flex-shrink-0 pt-6">
+            <div className="flex flex-col justify-between items-end ml-auto flex-shrink-0 pt-1">
                 <div className="flex gap-5">
                     <Link
                         href="https://aiia.seu.edu.cn/palm"
@@ -111,7 +111,7 @@ function Experience() {
                         University of California San Diego
                     </p>
                     <span className="justify-self-end text-lg font-medium text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
-                        2025 – Present
+                        2026.03 – Present
                     </span>
                     <p className="pb-2 text-base text-neutral-600 dark:text-neutral-400">
                         Visiting Student Researcher, Picasso Lab
@@ -123,7 +123,7 @@ function Experience() {
                 <li className="contents">
                     <p className="font-medium">Peking University</p>
                     <span className="justify-self-end text-lg font-medium text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
-                        2025 – Present
+                        2025.12 – 2026.10
                     </span>
                     <p className="pb-2 text-base text-neutral-600 dark:text-neutral-400">
                         Visiting Student Researcher, IF Lab
@@ -135,7 +135,7 @@ function Experience() {
                 <li className="contents">
                     <p className="font-medium">Southeast University</p>
                     <span className="justify-self-end text-lg font-medium text-neutral-900 dark:text-neutral-100 whitespace-nowrap">
-                        2023 – Present
+                        2023.08 – Present
                     </span>
                     <p className="pb-2 text-base text-neutral-600 dark:text-neutral-400">
                         B.Eng. in Computer Science and Technology
