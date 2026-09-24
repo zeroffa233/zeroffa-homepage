@@ -47,13 +47,13 @@ function ProfileCard() {
                     Email: baixinwan@seu.edu.cn
                 </p>
             </div>
-            <div className="flex flex-col justify-between items-end ml-auto flex-shrink-0 pt-4">
+            <div className="flex flex-col justify-between items-end ml-auto flex-shrink-0 pt-6">
                 <div className="flex gap-5">
                     <Link
                         href="https://aiia.seu.edu.cn/palm"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative w-24 h-75 flex-shrink-0 overflow-hidden rounded-lg"
+                        className="relative w-28 h-87 flex-shrink-0 overflow-hidden rounded-lg"
                     >
                         <Image src={Public.palmLogo} alt="Palm Logo" />
                     </Link>
@@ -62,7 +62,7 @@ function ProfileCard() {
                         href="https://www.seu.edu.cn/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative w-24 h-75 flex-shrink-0 overflow-hidden rounded-lg"
+                        className="relative w-28 h-87 flex-shrink-0 overflow-hidden rounded-lg"
                     >
                         <Image src={Public.seuLogo} alt="SEU Logo" />
                     </Link>
