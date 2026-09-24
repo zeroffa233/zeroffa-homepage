@@ -53,7 +53,7 @@ function ProfileCard() {
                         href="https://aiia.seu.edu.cn/palm"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
+                        className="relative w-24 h-75 flex-shrink-0 overflow-hidden rounded-lg"
                     >
                         <Image src={Public.palmLogo} alt="Palm Logo" />
                     </Link>
@@ -62,12 +62,12 @@ function ProfileCard() {
                         href="https://www.seu.edu.cn/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
+                        className="relative w-24 h-75 flex-shrink-0 overflow-hidden rounded-lg"
                     >
                         <Image src={Public.seuLogo} alt="SEU Logo" />
                     </Link>
                 </div>
-                <p className="italic text-md text-neutral-500 dark:text-neutral-400 text-right">
+                <p className="italic text-lg text-neutral-500 dark:text-neutral-400 text-right">
                     “自己想通了，无所谓别人怎么讲。
                     <br />
                     自己想不通，才要一直问别人的看法。”
