@@ -53,7 +53,7 @@ function ProfileCard() {
                         href="https://aiia.seu.edu.cn/palm"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
+                        className="relative w-24 h-75 flex-shrink-0 overflow-hidden rounded-lg"
                     >
                         <Image src={Public.palmLogo} alt="Palm Logo" />
                     </Link>
@@ -62,7 +62,7 @@ function ProfileCard() {
                         href="https://www.seu.edu.cn/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative w-32 h-100 flex-shrink-0 overflow-hidden rounded-lg"
+                        className="relative w-24 h-75 flex-shrink-0 overflow-hidden rounded-lg"
                     >
                         <Image src={Public.seuLogo} alt="SEU Logo" />
                     </Link>
