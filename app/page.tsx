@@ -70,7 +70,7 @@ function ProfileCard() {
                 <p className="italic text-lg text-neutral-500 dark:text-neutral-400 text-right">
                     “自己想通了，无所谓别人怎么讲。
                     <br />
-                    自己想不通，才要一直问别人的看法。”
+                    自己想不通，才要一直问别人怎么看。”
                     <br />
                     ——HuhuMeow
                 </p>
