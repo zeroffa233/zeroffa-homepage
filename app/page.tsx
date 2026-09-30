@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import * as Public from "../public";
+import { Moments } from "./components/moments";
 
 export default function Page() {
     return (
@@ -14,6 +15,8 @@ export default function Page() {
             <Publications />
             <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
             <Honors />
+            <hr className="mt-5 border-neutral-500 dark:border-neutral-500"></hr>
+            <Moments />
         </section>
     );
 }
