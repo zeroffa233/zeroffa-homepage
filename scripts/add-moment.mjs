@@ -33,11 +33,10 @@ function hasCommand(cmd) {
   }
 }
 
-// 抓取 macOS 剪贴板中的图片并保存到 dest；返回是否成功
+// 抓取 macOS 剪贴板中的图片并保存到 dest；返回 [是否成功, 诊断信息]
 function grabClipboardImage(dest) {
   if (process.platform !== "darwin") {
-    console.error("剪贴板抓图目前仅支持 macOS。");
-    return false;
+    return [false, "剪贴板抓图目前仅支持 macOS"];
   }
   const script = [
     "import AppKit",
@@ -49,7 +48,11 @@ function grabClipboardImage(dest) {
     'print("OK")',
   ].join("; ");
   const res = spawnSync("swift", ["-e", script, dest], { encoding: "utf-8" });
-  return res.status === 0 && res.stdout.includes("OK");
+  if (res.error) return [false, String(res.error)];
+  if (res.status !== 0)
+    return [false, `swift exit ${res.status}: ${String(res.stderr).slice(0, 150)}`];
+  if (res.stdout.includes("OK")) return [true, ""];
+  return [false, `swift stdout: ${String(res.stdout).trim().slice(0, 100)}`];
 }
 
 function appendMoment(text, images) {
@@ -88,21 +91,28 @@ async function interactive() {
       `${stamp}-${String(images.length + 1).padStart(2, "0")}.png`
     );
     let ok = false;
+    let grabErr = "";
     if (usePngpaste) {
       try {
         execFileSync("pngpaste", [dest]);
         ok = fs.existsSync(dest) && fs.statSync(dest).size > 0;
-      } catch {
-        ok = false;
+        if (!ok) grabErr = "pngpaste 未写出图片";
+      } catch (e) {
+        grabErr = String(e);
       }
     } else {
-      ok = grabClipboardImage(dest);
+      [ok, grabErr] = grabClipboardImage(dest);
     }
     if (ok) {
       images.push(path.basename(dest));
       console.log(`已保存: ${path.basename(dest)}`);
     } else {
-      console.log("剪贴板中没有图片（或抓取失败），可再粘贴重试，或输入 s 结束。");
+      console.log(
+        "剪贴板中没有图片（或抓取失败），可再粘贴重试，或输入 s 结束。"
+      );
+      if (grabErr) {
+        console.log(`诊断: ${grabErr.slice(0, 200)}`);
+      }
     }
   }
   rl.close();
