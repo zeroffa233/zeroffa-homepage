@@ -59,7 +59,7 @@ export function Moments() {
             <div key={i} className="mb-8">
               <div className="flex items-baseline gap-3 text-sm text-neutral-500 dark:text-neutral-400">
                 <span className="tabular-nums">
-                  #{String(i + 1).padStart(2, "0")}
+                  #{String(moments.length - i).padStart(2, "0")}
                 </span>
                 <span>{moment.datetime}</span>
               </div>
