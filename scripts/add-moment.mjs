@@ -60,6 +60,25 @@ function appendMoment(text, images) {
   fs.appendFileSync(dataFile, entry + "\n");
   console.log(`\n已添加动态 (${datetime}): ${text.trim()}`);
   if (images.length) console.log(`图片: ${images.join(", ")}`);
+  autoPush(text.trim());
+}
+
+// 发布后自动提交并推送本条动态涉及的文件；失败时提示手动推送
+function autoPush(text) {
+  if (!fs.existsSync(path.join(process.cwd(), ".git"))) return;
+  const git = (...args) => spawnSync("git", args, { encoding: "utf-8" });
+  git("add", "data/moments.jsonl", "public/moments");
+  const commit = git("commit", "-m", `moment: ${text.slice(0, 40)}`);
+  if (commit.status !== 0) {
+    console.log("（未自动提交：无变化或提交失败，请手动 git push）");
+    return;
+  }
+  const push = git("push", "origin", "main");
+  console.log(
+    push.status === 0
+      ? "已自动提交并推送，VPS 将自动部署上线。"
+      : "自动推送失败，请手动 git push。"
+  );
 }
 
 async function interactive() {
